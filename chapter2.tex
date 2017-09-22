@@ -1,0 +1,61 @@
+\chapter[Steady state full-core MSBR criticality simulation]{Steady state full-core MSBR criticality simulation}
+
+\section{Serpent 2 code overview}
+
+\section{Molten Salt Breeder Reactor description}
+
+\subsection{Core Zone I}
+
+The central portion, called Zone I, is made up of 1320 graphite elements, each 
+$10.16$cm$\times$10.16cm$\times$396.24cm.
+In Zone I, 13\% of the volume is fuel salt and 87\% is graphite. Zone I is 
+composed of 1320 graphite cells and 4 channels for control rods: two for 
+graphite rods which both regulate and shim during normal operation, and two
+for backup safety rods to assure sufficient negative reactivity for emergency 
+situations.
+
+These graphite elements have a mostly rectangular shape with lengthwise ridges 
+at each corner that leave space for salt flow elements. Various element sizes 
+reduce the peak damage flux and power density in the center of the core prevent 
+local graphite damage. Figure~\ref{fig:zone12A} demonstrates the elevation and 
+sectional views of graphite elements exactly as they are represented in this 
+Monte Carlo model.
+
+\subsection{Core Zone II}
+The undermoderated zone, Zone II, surrounds Zone I.
+Combined with the bounding radial reflector, Zone II serves to diminish neutron 
+leakage. This zone is formed of two kinds of elements: elements like those in 
+Zone I with a larger channel diameter (Zone II-A), and radial
+graphite slats (Zone II-B). 
+
+Zone II is Zone II 37\% salt by volume and each element has a fuel channel 
+diameter of 6.604cm. It is divided into two different zones: Zone II-A and Zone 
+II-B. The graphite elements for Zone II-A are prismatic. Zone II-B elements are 
+rectangular slats spaced far enough apart to provide the 0.37 fuel salt volume 
+fraction. Fig.~\ref{fig:zone2B} additionally shows the 5.08cm-wide annular 
+space between the core graphite and the radial reflector graphite. The annulus 
+contains 100\% fuel salt and serves to reduce the damage flux at the internal 
+surface of the graphite reflector blocks. The reactor Zone II-B graphite 
+5.08cm-thick slats vary in the radial dimension (average width is 26.67cm) but 
+are reconstructed without any approximation. From the ORNL report 
+\cite{robertson_conceptual_1971}, the suggested design of Zone II-B has 8 
+irregularly-shaped graphite elements every 45$^\circ$ as well as salt channels. 
+These graphite elements were simplified into right-circular cylindrical shapes 
+with central channels. This is the only simplification made to the \gls{MSBR} 
+conceptual geometry in this work.
+
+\subsection{Material composition}
+The fuel salt, the reactor graphite, and the modified HastelloyN are materials 
+unique of the \gls{MSBR} and were created at \gls{ORNL}. The initial fuel salt 
+loading composition is LiF-BeF$_2$-ThF$_4$-$^{233}$UF$_4$ (71.8-16-12-0.2 mole 
+\%). The lithium in the molten salt fuel is a fully enriched $^{7}$Li because 
+$^{6}$Li is a very strong neutron poison and becomes tritium upon neutron 
+capture. For cross section generation, ENDF/B-VII was employed 
+\cite{chadwick_endf/b-vii.0:_2006}. The specific temperature was fixed for each 
+material to correctly model the Doppler-broadening of resonance peaks when 
+Serpent generate problem-oriented nuclear data library.
+The isotope composition of each material at the initial state was described in 
+detail in the MSBR conceptual design study \cite{robertson_conceptual_1971} 
+and has been applied to Serpent model without any modification. %
+
+\section{Results}
