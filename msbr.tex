@@ -1,5 +1,4 @@
-\documentclass[draftthesis,tocnosub,noragright,centerchapter,12pt]{uiucecethesis09}
-
+\documentclass[tocnosub,noragright,centerchapter,12pt]{uiucecethesis09}
 % Use draftthesis for notes and date markings on every page.  Useful when you
 %   have multiple copies floating around.
 % Use offcenter for the extra .5 inch on the left side. Needed with fullpage and fancy.
@@ -19,6 +18,8 @@
 %\usepackage{url}  % Hyphenation of URLs.
 \usepackage{lscape}  % Useful for wide tables or figures.
 \usepackage[justification=raggedright]{caption}	% makes captions ragged right - thanks to Bryce Lobdell
+\usepackage[acronym,toc]{glossaries}  % acronyms inclusion
+\makeglossary
 
 % Uncomment the appropriate one of the following four lines:
 \msthesis
@@ -26,7 +27,7 @@
 %\otherdoctorate[abbrev]{Title of Degree}
 %\othermasters[abbrev]{Title of Degree}
 
-\title{Advanced fuel reprocessing and coupled multi-physics analysis of Molten Salt Breeder Reactor}
+\title{Advanced fuel reprocessing and multi-physics analysis of Molten Salt Breeder Reactor}
 \author{Andrei Rykhlevskii}
 \department{Department of Nuclear, Plasma and Radiological Engineering}
 \degreeyear{2017}
@@ -34,7 +35,7 @@
 % Advisor name is required for
 % - doctoral students for the ProQuest abstract
 % - master's students who do not have a master's committee
-\advisor{Prof. Kathryn D. Huff}
+\advisor{Professor Kathryn D. Huff}
 
 % Uncomment the \committee command for
 % - all doctoral students
@@ -43,13 +44,7 @@
 %        Professor Firstname Lastname} % etc.
 
 \begin{document}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% COPYRIGHT
-%
-%\copyrightpage
-%\blankpage
-
+\include{acros}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TITLE
 %
@@ -68,22 +63,21 @@
 \input{abs}
 \end{abstract}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DEDICATION
 %
-\begin{dedication}
+%\begin{dedication}
 % Whatever dedication you want.
-To my parents, for their love and support.
-\end{dedication}
+%To my parents, for their love and support.
+%\end{dedication}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ACKNOWLEDGMENTS
 %
 % Put acknowledgments in a file called "ack.tex" and it'll be inputted here.
-\begin{acknowledgments}
-\input{ack}
-\end{acknowledgments}
+%\begin{acknowledgments}
+%\input{ack}
+%\end{acknowledgments}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TABLE OF CONTENTS
@@ -95,14 +89,14 @@ To my parents, for their love and support.
 %
 % The List of Tables is not strictly necessary. Omitting the List of Tables will
 % simplify the thesis check and reduce the number of corrections.
-\listoftables
+%\listoftables
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % LIST OF FIGURES
 %
 % The List of Figures is not strictly necessary. Omitting the List of Figures will
 % simplify the thesis check and reduce the number of corrections.
-\listoffigures
+%\listoffigures
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % LIST OF ABBREVIATIONS
@@ -110,10 +104,11 @@ To my parents, for their love and support.
 % The List of Abbreviations is not strictly necessary.
 \chapter{LIST OF ABBREVIATIONS}
 
+%\printacronyms
 %\begin{symbollist*}
-%\item[EPIC] Explicitly Parallel Instruction Computing
-%\item[GPU] Graphics Processing Unit
-%\item[VLIW] Very Long Instruction Word
+%\item[MSBR] Molten Salt Breeder Reactor
+%\item[MSR] Molten Salt Reactor
+%\item[ORNL] Oak Ridge National Laboratory
 %\end{symbollist*}
 
 
@@ -129,9 +124,8 @@ To my parents, for their love and support.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % INSERT REAL CONTENT HERE
 %
-
-%\include{intro}	% for INTRODUCTION in "intro.tex"
-%\include{exper}
+\include{intro}	% for INTRODUCTION in "intro.tex"
+\include{chapter1}
 %\include{concl}
 
 
@@ -149,11 +143,6 @@ To my parents, for their love and support.
 \bibliographystyle{IEEE_ECE}
 % Put references in BibTeX format in thesisrefs.bib.
 \bibliography{thesisrefs}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% AUTHOR'S BIOGRAPHY
-% As of 10/03/2011, Author's Biography or Vita no longer accepted by Grad College
 
 \end{document}
 \endinput

@@ -151,7 +151,7 @@
 \let\nocopyrightpage\@thesiscrpagefalse
 \if@thesisdraft\nocopyrightpage\fi
 \msthesis
-\department{Electrical and Computer Engineering}
+\department{Department of Nuclear, Plasma, and Radiological Engineering}
 \college{Graduate College}
 \def\@schools{}
 \def\@degreeyear{\number\year}
@@ -160,13 +160,6 @@
 \newsavebox{\degree@dept@test} %% ^ 3.07
 \renewcommand\maketitle{
     \if@thesiscrpage
-        \newpage
-        \thispagestyle{empty}
-        \null\vfill
-        \centerline{\copyrightnotice}%
-        \vskip 3ex % skip to visually center copyright notice
-        \vfill
-    \fi
     \newpage
     \thispagestyle{empty}%
     \enlargethispage{1in}%
@@ -195,7 +188,7 @@
     \oddsidemargin=\@tempdima
     \let\evensidemargin=\oddsidemargin
     \newdimen\thesis@dim
-    \thesis@dim=1.5in %% ECE: edit to adjust margin (SR)
+    \thesis@dim=1.0in %% ECE: edit to adjust margin (SR)
     \if@largecaps
        \def\lc@selectfont{\large\selectfont}%
 %%%        \def\lc@selectfont{\fontshape{lc}\selectfont}%
@@ -625,9 +618,8 @@
   \global\@topnum\z@
   \@afterindentfalse
   \secdef\@chapter\@schapter}
-\renewcommand\chaptername{\if@mixc@sech@p Chapter\else CHAPTER\fi}
+\renewcommand\chaptername{}
 \renewcommand\appendixname{\if@mixc@sech@p Appendix\else APPENDIX\fi}
-\newcommand\aubioname{Author's Biography} %% instead of Vita for ECE
 \newcommand\aubio{
   \chapter{\aubioname}%
 }
