@@ -1,1080 +1,274 @@
-@STRING{IEEE_J_EC         = "{IEEE} Trans. En. Conv."}
-@STRING{IEEE_J_PWRE       = "{IEEE} Trans. Power Electron."}
-@STRING{IEEE_J_PWRS       = "{IEEE} Trans. Power Syst."}
-@STRING{IEEE_J_MAG        = "{IEEE} Trans. Magn."}
-@STRING{J_NUM_ENG         = "Int. J. Numer. Meth. Engng."}
-@STRING{ENG_ANAL          = "Eng. Anal."}
-@STRING{IEEE_J_EDU        = "{IEEE} Trans. Educ."}
-@STRING{IEEE_J_MTT        = "{IEEE} Trans. Microwave Theory Tech."}
-@STRING{IEEE_J_IA         = "{IEEE} Trans. Ind. Applicat."}
-@STRING{IEEE_J_AntProp    = "{IEEE} Trans. Ant. and Prop."}
 
-@IEEEtranBSTCTL{IEEEexample:BSTcontrol,
-CTLmax_names_forced_etal = "4",
-CTLnames_show_etal = "1"
-};
-
-%% IEEEexample.bib 
-%% V1.10 
-%% 2002/09/27
-%% Copyright (c) 2002 by Michael Shell
-%% mshell(at)ece.gatech.edu
-%% See support website below for current contact information.
-%% 
-%% NOTE: This text file uses MS Windows line feed conventions. When (human)
-%% reading this file on other platforms, you may have to use a text
-%% editor that can handle lines terminated by the MS Windows line feed
-%% characters (0x0D 0x0A).
-%% 
-%% This is an example BibTeX database for the official IEEEtran.bst
-%% BibTeX style file.
-%% 
-%% Some entries call strings that are defined in the IEEEabrv.bib file.
-%% Therefore, IEEEabrv.bib should be loaded prior to this file. 
-%% Usage: 
-%% 
-%% \bibliographystyle{./IEEEtran} % use IEEEtran.bst style
-%% \bibliography{./IEEEabrv,./IEEEexample}
-%% 
-%% 
-%% Support sites:
-%% http://www.ctan.org/tex-archive/macros/latex/contrib/supported/IEEEtran/ 
-%% and/or
-%% http://www.ieee.org
-%%**********************************************************************
-%% Legal Notice:
-%% This code is offered as-is without any warranty either expressed or
-%% implied; without even the implied warranty of MERCHANTABILITY or
-%% FITNESS FOR A PARTICULAR PURPOSE!
-%% User assumes all risk.
-%% In no event shall IEEE or any contributor to this code be liable for
-%% any damages or losses, including, but not limited to, incidental,
-%% consequential, or any other damages, resulting from the use or misuse
-%% of any information contained here.
-%%
-%% This code is distributed under the Perl Artistic License 
-%% ( http://language.perl.com/misc/Artistic.html ) 
-%% and may be freely used, distributed and modified - subject to the
-%% constraints therein.
-%% Retain all contribution notices, credits and disclaimers.
-%% 
-%% All comments are the opinions of their respective authors and are not
-%% necessarily endorsed by the IEEE.
-%%**********************************************************************
-
-
-% Note that, because the example references were taken from actual IEEE
-% publications, these examples do not always contain the full amount
-% of information that may be desirable (for use with other BibTeX styles).
-% In particular, full names (not abbreviated with initials) should be
-% entered whenever possible as some (non-IEEE) bibliography styles use
-% full names. IEEEtran.bst will automatically abbreviate when it
-% encounters full names.
- 
- 
- 
- 
-% references for the IEEEtran.bst documentation
-% the distribution site for IEEEtran.bst
-@electronic{IEEEexample:shellCTANpage,
-  author        = "Michael Shell",
-  title         = "{IEEE}tran Homepage on {CTAN}",
-  url           = "http://www.ctan.org/tex-archive/macros/latex/contrib/supported/IEEEtran/",
-  year          = "2002"
-};
-
-% the IEEE website
-% sort key is needed for sorting styles
-@electronic{IEEEexample:IEEEwebsite,
-  title         = "The {IEEE} Website",
-  url           = "http://www.ieee.org/",
-  year          = "2002",
-  key           = "IEEE"
-};
-
-% The BibTeX user's guide.
-% The filename could have been put in the URL instead. But, there might
-% be other interesting things for the user in the same directory - and
-% the filename might change before the directory that contains it.
-@electronic{IEEEexample:bibtexuser,
-  author        = "Oren Patashnik",
-  title         = "{\BibTeX}ing",
-  howpublished  = "{btxdoc.pdf}",
-  url           = "http://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/",
-  month         = feb,
-  year          = "1988"
-};
-
-% The BibTeX style designer's guide.
-@electronic{IEEEexample:bibtexdesign,
-  author        = "Oren Patashnik",
-  title         = "Designing {\BibTeX\ } Styles",
-  howpublished  = "{btxhak.pdf}",
-  url           = "http://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/",
-  month         = feb,
-  year          = "1988"
-};
-
-% The BibTeX Tips and FAQ guide.
-@electronic{IEEEexample:bibtexFAQ,
-  author        = "David Hoadley and Michael Shell",
-  title         = "{\BibTeX}\ Tips and {FAQ}",
-  howpublished  = "{btxFAQ.txt}",
-  url           = "http://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/",
-  month         = oct,
-  year          = "2002"
-};
-
-% TeX User Group Bibliography Archive
-@electronic{IEEEexample:beebe_archive,
-  author        = "Nelson H. F. Beebe",
-  title         = "{\TeX\ }User Group Bibliography Archive",
-  url           = "http://www.math.utah.edu:8080/pub/tex/bib/index-table.html",
-  month         = may,
-  year          = "2002"
-};
-
-% The url.sty package.
-@electronic{IEEEexample:urlsty,
-  author        = "Donald Arseneau",
-  title         = "The url.sty package",
-  url           = "http://www.ctan.org/tex-archive/macros/latex/contrib/other/misc/",
-  month         = mar,
-  year          = "1999",
-};
-
-
-% The hyperref.sty package.
-@electronic{IEEEexample:hyperrefsty,
-  author        = "Sebastian Rahtz and Heiko Oberdiek",
-  title         = "The hyperref.sty package",
-  url           = "http://www.ctan.org/tex-archive/macros/latex/contrib/supported/hyperref/",
-  month         = jul,
-  year          = "2002",
-};
-
-% The Babel package.
-@electronic{IEEEexample:babel,
-  author        = "Johannes Braams",
-  title         = "The {Babel} package",
-  url           = "http://www.ctan.org/tex-archive/macros/latex/required/babel/",
-  month         = feb,
-  year          = "2001",
-};
-
-
-
-
-
-% The three most common and typical types of references used in
-% IEEE publications:
-
-% an article in a journal
-% Note the use of the IEEE_J_EDL string, defined in the IEEEabrv.bib file,
-% for the journal name. IEEEtran.bst defines the BibTeX standard three
-% letter month codes per IEEE style.
-% From the June 2002 issue of "IEEE Transactions on Electron Devices",
-% page 996, reference #16.
-@article{IEEEexample:article_typical,
-  author        = "S. Zhang and C. Zhu and J. K. O. Sin and P. K. T. Mok",
-  title         = "A Novel Ultrathin Elevated Channel Low-temperature 
-                   Poly-{Si} {TFT}",
-  journal       = IEEE_J_EDL,
-  volume        = "20",
-  month         = nov,
-  year          = "1999",
-  pages         = "569-571"
-};
-
-% journal article using et al.
-% The (five) authors are actually: F. Delorme, S. Slempkes, G. Alibert, 
-% B. Rose, J. Brandon
-% The month (July) was not given here.
-% From the September 1998 issue of "IEEE Journal on Selected Areas in
-% Communications", page 1257, reference #28.
-@article{IEEEexample:articleetal,
-  author        = "F. Delorme and others",
-  title         = "Butt-jointed {DBR} Laser With 15 {nm} Tunability Grown
-                   in Three {MOVPE} Steps",
-  journal       = "Electron. Lett.",
-  volume        = "31",
-  number        = "15",
-  year          = "1995",
-  pages         = "1244-1245"
-};
-
-
-% a paper in a conference proceedings
-% "conference" can be used as an alias for "inproceedings"
-% From the June 2002 issue of "Journal of Microelectromechanical Systems",
-% page 205, reference #16.
-@inproceedings{IEEEexample:conf_typical,
-  author        = "R. K. Gupta and S. D. Senturia",
-  title         = "Pull-in Time Dynamics as a Measure of Absolute Pressure",
-  booktitle     = "Proc. {IEEE} International Workshop on
-                   Microelectromechanical Systems ({MEMS}'97)",
-  address       = "Nagoya, Japan",
-  month         = jan,
-  year          = "1997",
-  pages         = "290-294"
-};
-
-
-% a book
-% From the May 2002 issue of "IEEE Transactions on Magnetics",
-% page 1466, reference #4.
-@book{IEEEexample:book_typical,
-  author        = "B. D. Cullity",
-  title         = "Introduction to Magnetic Materials",
-  publisher     = "Addison-Wesley",
-  address       = "Reading, MA",
-  year          = "1972"
-};
-
-
-
-
-% Other examples
-
-% journal article with large page numbers, IEEE will divide numbers 5 digits
-% or longer into groups of three with small spaces between them. Page ranges
-% can be separated via either "-" or "--", IEEEtran.bst will automatically
-% convert the separator dash(es) to "--".
-% Authors and/or IEEE do not always provide/use the journal number, but it
-% was used in this case. IEEEtran.bst can be configured to ignore journal
-% numbers if desired.
-% From the August 2000 issue of "IEEE Photonics Technology Letters",
-% page 1039, reference #11.
-@article{IEEEexample:articlelargepages,
-  author        = "A. Castaldini and A. Cavallini and B. Fraboni
-                   and P. Fernandez and J. Piqueras",
-  title         = "Midgap Traps Related to Compensation Processes in
-                   {CdTe} Alloys",
-  journal       = "Phys. Rev. B.",
-  volume        = "56",
-  number        = "23",
-  year          = "1997",
-  pages         = "14897-14900"
-};
-
-
-% journal article with dual months 
-% use the BibTeX "#" concatenation operator
-% From the March 2002 issue of "IEEE Transactions on Mechatronics",
-% page 21, reference #8.
-@article{IEEEexample:articledualmonths,
-  author        = "Y. Okada and K. Dejima and T. Ohishi",
-  title         = "Analysis and Comparison of {PM} Synchronous Motor and
-                   Induction Motor Type Magnetic Bearings",
-  journal       = IEEE_J_IA,
-  volume        = "31",
-  month         = sep # "/" # oct,
-  year          = "1995",
-  pages         = "1  047-1053"
-};
-
-
-% journal article to be published as a misc entry type
-% date information like month and year is optional
-% However, the article form like that below may be a better approach.
-% From the May 2002 issue of "IEEE Journal of Selected Areas in 
-% Communication", page 725, reference #3.
-@misc{IEEEexample:TBPmisc,
-  author        = "M. Coates and A. Hero and R. Nowak and B. Yu",
-  title         = "Internet Tomography",
-  howpublished  = IEEE_M_SP,
-  month         = may,
-  year          = "2002",
-  note          = "to be published"
-};
-
-
-% journal article to be published as an article entry type
-% year is required, so if absent, use the year field to hold
-% the "submitted for publication" in order to avoid a warning for
-% the missing year field.
-% From the June 2002 issue of "IEEE Transactions on Information Theory",
-% page 1461, reference #21.
-@article{IEEEexample:TBParticle,
-  author        = "N. Kahale and R. Urbanke",
-  title         = "On the Minimum Distance of Parallel and Serially
-                   Concatenated Codes",
-  journal       = IEEE_J_IT,
-  year          = "submitted for publication"
-};
-
-
-
-
-% book with editor and no author
-% From the June 2002 issue of "IEEE Transactions on Information Theory",
-% page 1725, reference #1.
-@book{IEEEexample:bookwitheditor,
-  editor        = "J. C. Candy and G. C. Temes",
-  title         = "Oversampling Delta-Sigma Data Converters Theory,
-                   Design and Simulation",
-  publisher     = "{IEEE} Press.",
-  address       = "New York",
-  year          = "1992"
-};
-
-
-% book with edition, author and editor
-% Note that the standard BibTeX styles do not support book entries with both
-% author and editor fields, but IEEEtran.bst does.
-% The standard BibTeX way of specifying the edition is to use capitalized
-% ordinal words such as "First", "Second", etc. Most .bst files can convert
-% up to about "Fifth" into the format needed. IEEEtran.bst can convert up
-% to "Tenth" to the "Arabic ordinal" form IEEE uses (e.g., "10th"). For
-% editions over the tenth, it is best to use the "Arabic ordinal" form for
-% IEEE related work (e.g., "101st")
-% Note how "Jr." has to be entered.
-% From the May 2002 issue of "Journal of Lightwave Technology", page 856,
-% reference #17.
-@book{IEEEexample:book,
-  author        = "S. M. Metev and V. P. Veiko",
-  editor        = "Osgood, Jr., R. M.",
-  title         = "Laser Assisted Microtechnology",
-  edition       = "Second",
-  publisher     = "Springer-Verlag",
-  address       = "Berlin, Germany",
-  year          = "1998"
-};
-
-
-% book with series and volume
-% From the January 2000 issue of "IEEE Transactions on Communications",
-% page 11, reference #31.
-@book{IEEEexample:bookwithseriesvolume,
-  editor        = "J. Breckling",
-  title         = "The Analysis of Directional Time Series: Applications to
-                   Wind Speed and Direction",
-  series        = "Lecture Notes in Statistics",
-  publisher     = "Springer",
-  address       = "Berlin, Germany",
-  year          = "1989",
-  volume        = "61"
-};
-
-
-% inbook with chapter number. The pages field could also have been given.
-% The chapter number could be changed to something else such as a section
-% number via the type field: type = "sec.".
-% From the May 2002 issue of "IEEE Transactions on Circuits and Systems---I: 
-% Fundamental Applications and Theory", page 638, reference #22.
-@inbook{IEEEexample:inbook,
-  author        = "H. E. Rose",
-  title         = "A Course in Number Theory",
-  publisher     = "Oxford Univ. Press",
-  address       = "New York, NY",
-  year          = "1988",
-  chapter       = "3"
-};
-
-
-% inbook with pages and note. The language field is not set to Russian
-% because the title is presented here in its translated, English, form.
-% From the May 2002 issue of "IEEE Transactions on Magnetics", page 1533,
-% reference #5.
-@inbook{IEEEexample:inbookpagesnote,
-  author        = "B. K. Bul",
-  title         = "Theory Principles and Design of Magnetic Circuits",
-  publisher     = "Energia Press",
-  address       = "Moscow",
-  year          = "1964",
-  pages         = "464",
-  note          = "(in Russian)"
-};
-
-
-
-
-
-% incollection with author and editor
-% From the May 2002 issue of "Journal of Lightwave Technology",
-% page 807, reference #7.
-@incollection{IEEEexample:incollection,
-  author        = "W. V. Sorin",
-  editor        = "D. Derickson",
-  title         = "Optical Reflectometry for Component Characterization",
-  booktitle     = "Fiber Optic Test and Measurement",
-  publisher     = "Prentice-Hall",
-  address       = "Englewood Cliffs, NJ",
-  year          = "1998"
-};
-
-
-% incollection with series
-% From the April 2000 issue of "IEEE Transactions on Communication",
-% page 609, reference #3.
-@incollection{IEEEexample:incollectionwithseries,
-  author        = "J. B. Anderson and K. Tepe",
-  title         = "Properties of the Tailbiting {BCJR} Decoder",
-  booktitle     = "Codes, Systems and Graphical Models",
-  series        = "{IMA} Volumes in Mathematics and Its Applications",
-  publisher     = "Springer-Verlag",
-  address       = "New York",
-  year          = "2000"
-  
-};
-
-
-% incollection with author, editor, chapter and pages
-% From the January 2000 issue of "IEEE Transactions on Communications",
-% page 16, reference #9.
-@incollection{IEEEexample:incollection_chpp,
-  author        = "P. Hedelin and P. Knagenhjelm and M. Skoglund",
-  editor        = "W. B. Kleijn and K. K. Paliwal",
-  title         = "Theory for Transmission of Vector Quantization Data",
-  booktitle     = "Speech Coding and Synthesis",
-  publisher     = "Elsevier Science",
-  address       = "Amsterdam, The Netherlands",
-  year          = "1995",
-  chapter       = "10",
-  pages         = "347-396"
-};
-
-
-% incollection with a large number of authors, some authors/journals will
-% use et al. for so many names. IEEEtran.bst can be configured to do this
-% if desired, or "R. M. A. Dawson and others" can be used instead.
-% Note that IEEE may not include the publisher for incollection entries -
-% IEEEtran.bst will not issue a warning if the publisher is missing for
-% incollections - but other .bst files often will.
-% From the June 2002 issue of "IEEE Transactions on Electron Devices",
-% page 996, reference #12.
-@incollection{IEEEexample:incollectionmanyauthors,
-  author        = "R. M. A. Dawson and Z. Shen and D. A. Furst and
-                   S. Connor and J. Hsu and M. G. Kane and R. G. Stewart and
-                   A. Ipri and C. N. King and P. J. Green and R. T. Flegal
-                   and S. Pearson and W. A. Barrow and E. Dickey and K. Ping
-                   and C. W. Tang and S. Van. Slyke and
-                   F. Chen and J. Shi and J. C. Sturm and M. H. Lu",
-  title         = "Design of an Improved Pixel for a Polysilicon 
-                   Active-Matrix Organic {LED} Display",
-  booktitle     = "{SID} Tech. Dig.",
-  volume        = "29",
-  year          = "1998",
-  pages         = "11-14"
-};
-
-
-
-
-
-% A Motorola data book as a manual
-% It is somewhat unusual to include the data book part number.
-% in the title. It might be more correct to put this information
-% in the howpublished field instead.
-% From the December 2000 issue of "IEEE Transactions on Communications",
-% page 1986, reference #10.
-@manual{IEEEexample:motmanual,
-  title         = "{FLEXChip} Signal Processor ({MC68175/D})",
-  organization  = "Motorola",
-  year          = "1996"
-};
-
-% same reference, but using IEEEtran's howpublished extension
-@manual{IEEEexample:motmanualhowpub,
-  title         = "{FLEXChip} Signal Processor",
-  howpublished  = "{MC68175/D}",
-  organization  = "Motorola",
-  year          = "1996"
-};
-
-
-
-
-% conference paper with an address and days. Some journals capitalize the
-% letters in "Globecom", this one did not.
-% From the May 2002 issue of "IEEE Transactions on Communications",
-% page 697, reference #12.
-@inproceedings{IEEEexample:confwithadddays,
-  author        = "M. S. Yee and L. Hanzo",
-  title         = "Radial Basis Function Decision Feedback Equaliser
-                   Assisted Burst-by-burst Adaptive Modulation",
-  booktitle     = "Proc. {IEEE} Globecom '99",
-  address       = "Rio de Janeiro, Brazil",
-  month         = dec # " 5--9,",
-  year          = "1999",
-  pages         = "2183-2187"
-};
-
-
-% conference paper with volume number. A conference proceedings with a vol
-% number is a little uncommon, note that the vol number is placed
-% before the address in the formatted bibliography entry
-% From the April 2002 issue of "IEEE/ACM Transactions on Networking",
-% page 181, reference #26.
-@inproceedings{IEEEexample:confwithvolume,
-  author        = "M. Yajnik and S. B. Moon and J. Kurose and D. Towsley",
-  title         = "Measurement and Modeling of the Temporal Dependence in
-                   Packet Loss",
-  booktitle     = "Proc. {IEEE} {INFOCOM}'99",
-  volume        = "1",
-  address       = "New York, NY",
-  month         = mar,
-  year          = "1999",
-  pages         = "345-352"
-};
-
-
-% conference paper with a paper number, the type field can be used to
-% override the word "paper", e.g., type = "postdeadline paper". A type
-% can be given even without a paper  field.
-% Also, IEEEtran.bst can be configured to ignore paper numbers and types.
-% From the May 2002 issue of "Journal of Lightwave Technology",
-% page 807, reference #4.
-@inproceedings{IEEEexample:confwithpaper,
-  author        = "M. Wegmuller and J. P. von der Weid and P. Oberson
-                   and N. Gisin",
-  title         = "High Resolution Fiber Distributed Measurements With
-                   Coherent {OFDR}",
-  booktitle     = "Proc. {ECOC}'00",
-  year          = "2000",
-  paper         = "11.3.4",
-  pages         = "109"
-};
-
-
-% conference paper with a postdeadline type paper, the paper field is
-% optional.
-% From the August 2000 issue of "IEEE Photonics Technology Letters",
-% page 1087, reference #12.
-@inproceedings{IEEEexample:confwithpapertype,
-  author        = "B. Mikkelsen and G. Raybon and R.-J. Essiambre and
-                   K. Dreyer and Y. Su. and L. E. Nelson and J. E. Johnson
-                   and G. Shtengel and A. Bond and D. G. Moodie and
-                   A. D. Ellis",
-  title         = "160 {Gbit/s} Single-channel Transmission Over 300 km 
-                   Nonzero-dispersion Fiber With Semiconductor Based
-                   Transmitter and Demultiplexer",
-  booktitle     = "Proc. {ECOC}'99",
-  year          = "1999",
-  paper         = "2-3",
-  type          = "postdeadline paper",
-  pages         = "28-29"
-};
-
-
-% presented at a conference
-% intype overrides the default "in" and causes the booktitle not to be
-% emphasized (rendered in italics).
-% From the February 2002 issue of "IEEE/ACM Transactions on Networking",
-% page 163, reference #6.
-@inproceedings{IEEEexample:presentedatconf,
-  author        = "S. G. Finn and M. M{\'e}dard and R. A. Barry",
-  title         = "A Novel Approach to Automatic Protection Switching
-                   Using Trees",
-  intype        = "presented at the",
-  booktitle     = "Proc. Int. Conf. Commun.",
-  year          = "1997"
-};
-
-
-
-
-
-% master's thesis, often the University name will be abbreviated and the
-% state or country will be included in the address. The type field can
-% used to override the default type "Master's thesis"
-% From the June 2002 issue of "IEEE Transactions on Microelectromechanical
-% Systems", page 186, reference #11.
-@mastersthesis{IEEEexample:masters,
-  author        = "Nin C. Loh",
-  title         = "High-Resolution Micromachined Interferometric
-                   Accelerometer",
-  school        = "Massachusetts Institute of Technology",
-  address       = "Cambridge",
-  year          = "1992"
-};
-
-
-% master's thesis with a type field
-% From the August 2001 issue of "IEEE/ACM Transactions on Networking",
-% page 391, reference #12.
-@mastersthesis{IEEEexample:masterstype,
-  author        = "A. Karnik",
-  title         = "Performance of {TCP} Congestion Control with Rate
-                   Feedback: {TCP/ABR} and Rate Adaptive {TCP/IP}",
-  school        = "Indian Institute of Science",
-  type          = "M. Eng. thesis",
-  address       = "Bangalore, India",
-  month         = jan,
-  year          = "1999"
-};
-
-
-
-
-
-% Ph.D. dissertation with a URL field, the university is abbreviated
-% From the October 2001 issue of "IEEE/ACM Transactions on Networking",
-% page 590, reference #11.
-@phdthesis{IEEEexample:phdurl,
-  author        = "Q. Li",
-  title         = "Delay Characterization and Performance Control of
-                   Wide-area Networks",
-  school        = "Univ. of Delaware",
-  address       = "Newark",
-  month         = may,
-  year          = "2000",
-  url           = "http://www.ece.udel.edu/~qli"
-};
-
-
-
-
-
-% technical report
-% From the August 2001 issue of "IEEE/ACM Transactions on Networking",
-% page 490, reference #15.
-@techreport{IEEEexample:techrep,
-  author        = "R. Jain and K. K. Ramakrishnan and D. M. Chiu",
-  title         = "Congestion Avoidance in Computer Networks with a 
-                   Connectionless Network Layer",
-  institution   = "Digital Equipment Corporation",
-  address       = "MA",
-  number        = "DEC-TR-506",
-  month         = aug,
-  year          = "1987"
-};
-
-
-% technical report with type
-% for those times when "Tech. Rep." needs to be modified
-% From the February 2001 issue of "IEEE/ACM Transactions on Networking",
-% page 46, reference #8.
-@techreport{IEEEexample:techreptype,
-  author        = "J. Padhye and V. Firoiu and D. Towsley",
-  title         = "A Stochastic Model of {TCP} {R}eno Congestion Avoidance
-                   and Control",
-  institution   = "Univ. of Massachusetts",
-  address       = "Amherst, MA",
-  type          = "CMPSCI Tech. Rep.",
-  number        = "99-02",
-  year          = "1999"
-};
-
-
-% technical report with type
-% for those times when "Tech. Rep." needs to be modified
-% This reference did not have an address.
-% From the January 2000 issue of "IEEE Transactions on Communications",
-% page 117, reference #6.
-@techreport{IEEEexample:techreptypeii,
-  author        = "D. Middleton and A. D. Spaulding",
-  title         = "A Tutorial Review of Elements of Weak Signal Detection
-                   in Non-{G}aussian {EMI} Environments",
-  institution   = "National Telecommunications and Information
-                   Administration ({NTIA}), U.S. Dept. of Commerce",
-  type          = "NTIA Report",
-  number        = "86-194",
-  month         = may,
-  year          = "1986"
-};
-
-
-
-
-
-% an unpublished work
-% for unpublished types, the note field is required. IEEE usually
-% just uses the word "unpublished" for the note.
-% From the August 2001 issue of "IEEE/ACM Transactions on Networking",
-% page 391, reference #16.
-@unpublished{IEEEexample:unpublished,
-  author        = "T. J. Ott and N. Aggarwal",
-  title         = "{TCP} over {ATM}: {ABR} or {UBR}",
-  note          = "Unpublished"
-};
-
-
-
-
-
-% electronic with a howpublished information field 
-% From the August 2001 issue of "IEEE/ACM Transactions on Networking",
-% page 391, reference #7.
-@electronic{IEEEexample:electronhowinfo,
-  author        = "V. Jacobson",
-  title         = "Modified {TCP} Congestion Avoidance Algorithm",
-  howpublished  = "end2end-interest mailing list",
-  url           = "ftp://ftp.isi.edu/end2end/end2end-interest-1990.mail",
-  month         = apr,
-  year          = "1990"
-};
-
-
-% electronic with a howpublished information field 
-% From the August 2001 issue of "IEEE/ACM Transactions on Networking",
-% page 418, reference #31.
-@electronic{IEEEexample:electronhowinfo2,
-  author        = "V. Valloppillil and K. W. Ross",
-  title         = "Cache Array Routing Protocol v1.1",
-  howpublished  = "Internet draft",
-  url           = "http://ds1.internic.net/internet-drafts/draft-vinod-carp-v1-03.txt",
-  year          = "1998"
-};
-
-
-% electronic with an organization and address
-% From the February 2002 issue of "IEEE/ACM Transactions on Networking",
-% page 114, reference #15.
-@electronic{IEEEexample:electronorgadd,
-  author        = "D. H. Lorenz and A. Orda",
-  title         = "Optimal Partition of {QoS} Requirements on Unicast
-                   Paths and Multicast Trees",
-  organization  = "Dept. Elect. Eng., Technion",
-  address       = "Haifa, Israel",
-  url           = "ftp://ftp.technion.ac.il/pub/supported/ee/Network/lor.mopq98.ps",
-  month         = jul,
-  year          = "1998"
-};
-
-
-
-
-
-% U.S. patent
-% Use the type field to override the patent type. e.g.,
-% type = "Patent Application"
-% The address is that of the assignee. Note that IEEE does not
-% display the assignee, the address, and only displays one date.
-% (if year is not present, the filed dates are used.) However, this
-% information should be entered as other BibTeX styles may use it.
-% alternatively, nationality could be entered as "U.S." 
-% From the April 2000 issue of "IEEE Transactions on Communications",
-% page 542, reference #6.
-@patent{IEEEexample:uspat,
-  author        = "Ronald E. Sorace and Victor S. Reinhardt and
-                   Steven A. Vaughn",
-  assignee      = "Hughes Aircraft Company",
-  address       = "Los Angeles, CA",
-  title         = "High-Speed Digital-to-{RF} Converter",
-  nationality   = "United States",
-  number        = "5668842",
-  dayfiled      = "28",
-  monthfiled    = feb,
-  yearfiled     = "1995",
-  day           = "16",
-  month         = sep,
-  year          = "1997"
-};
-
-
-% Japanese Patent
-% From the April 2000 issue of "IEEE Transactions on Communications",
-% page 556, reference #6.
-@patent{IEEEexample:jppat,
-  author        = "U. Hideki",
-  title         = "Quadrature Modulation Circuit",
-  nationality   = "Japanese",
-  number        = "152932/92",
-  day           = "20",
-  month         = may,
-  year          = "1992"
-};
-
-
-% French Patent request, the language field must be entered in lower case
-% as this is the option name Babel uses. The nationality field needs to be
-% capitalized. Because this is a patent request, the date filed fields are
-% used while the date fields are left empty/missing. In other countries,
-% the words "Patent Application", etc. are used instead.
-% From the April 2000 issue of "IEEE Transactions on Communications",
-% page 556, reference #9.
-@patent{IEEEexample:frenchpatreq,
-  author        = "F. Kowalik and M. Isard",
-  title         = "Estimateur d'un D{\'e}faut de Fonctionnement 
-                   d'un Modulateur en Quadrature et {\'E}tage de Modulation
-                   l'Utilisant",
-  language      = "french",
-  nationality   = "French",
-  type          = "Patent Request",
-  number        = "9500261",
-  dayfiled      = "11",
-  monthfiled    = jan,
-  yearfiled     = "1995"
-};
-
-
-
-
-
-% a periodical
-% From the April 2001 issue of "IEEE/ACM Transactions on Networking",
-% page 160, reference #1.
-% sort key is needed for sorting styles
-@periodical{IEEEexample:periodical,
-  title         = IEEE_M_PCOM # ", Special Issue on Wireless {ATM}",
-  volume        = "3",
-  month         = aug,
-  year          = "1996",
-  key           = "IEEE"
-};
-
-
-
-
-
-% standard, IEEE does not use the address for standards, but it is good
-% to provide one for BibTeX styles that use it.
-% From the August 2001 issue of "IEEE/ACM Transactions on Networking",
-% page 451, reference #2.
-@standard{IEEEexample:standard,
-  title         = "Wireless {LAN} Medium Access Control {(MAC)} and 
-                   Physical Layer {(PHY)} Specification",
-  organization  = "IEEE",
-  address       = "Piscataway, NJ",
-  number        = "802.11",
-  year          = "1997"
-};
-
-
-% standard with type and revision, the type overrides the word standard
-% (or std.). Here a standard number is not available and a revision number
-% is used.
-% From the August 2000 issue of "IEEE Photonics Technology Letters",
-% page 1048, reference #13.
-@standard{IEEEexample:standardproposed,
-  title         = "Fiber Channel Physical Interface ({FC-PI})",
-  institution   = "NCITS",
-  address       = "Washington, DC",
-  type          = "Working Draft Proposed Standard",
-  revision      = "5.2",
-  year          = "1999"
-};
-
-
-% standard draft as a misc with author
-% From the May 2002 issue of "IEEE Journal of Selected Areas in
-% Communication", page 725, reference #16.
-@misc{IEEEexample:draftasmisc,
-  author        = "I. Widjaja and A. Elwalid",
-  title         = "{MATE}: {MPLS} Adaptive Traffic Engineering",
-  howpublished  = "IETF Draft",
-  year          = "1999"
-};
-
-
-
-
-
-% misc for a techreport like reference
-% techreport is not perfectly suitable because this entry lacks
-% an institution field
-% From the August 2001 issue of "IEEE/ACM Transactions on Networking",
-% page 490, reference #22.
-@misc{IEEEexample:miscforum,
-  author        = "L. Roberts",
-  title         = "Enhanced Proportional Rate Control Algorithm {PRCA}",
-  howpublished  = "{ATM} Forum Contribution 94-0735R1",
-  month         = aug,
-  year          = "1994"
-};
-
-
-% misc for a white paper
-% From the August 2001 issue of "IEEE/ACM Transactions on Networking",
-% page 478, reference #4 - Note that the reference there (improperly?)
-% used the author field for "Cisco".
-@misc{IEEEexample:whitepaper,
-  title         = "Advanced {QoS} Services for the Intelligent Internet",
-  howpublished  = "White Paper",
-  organization  = "Cisco",
-  month         = may,
-  year          = "1997"
-};
-
-
-% misc for a data sheet
-% From the November 2000 issue of "IEEE Photonics Technology Letters",
-% page 1551, reference #6.
-@misc{IEEEexample:datasheet,
-  title         = "{PDCA12-70} data sheet",
-  organization  = "Opto Speed SA",
-  address       = "Mezzovico, Switzerland"
-};
-
-
-
-
-
-% Other unusual references
-
-% a private communication as a misc entry type
-% sometimes the designation "personal communication" is used instead
-% From the June 2002 issue of "IEEE Transactions on Information Theory",
-% page 1725, reference #16.
-@misc{IEEEexample:private,
-  author        = "S. Konyagin",
-  howpublished  = "private communication",
-  year          = "1998"
-};
-
-
-% an internet request for comments (RFC) as a misc entry type
-% It would also be nice to add a URL to these types of things.
-% RFCs can also be handled as electronic references.
-% From the April 2002 issue of "IEEE/ACM Transactions on Networking",
-% page 181, reference #14.
-@misc{IEEEexample:miscrfc,
-  author        = "K. K. Ramakrishnan and S. Floyd",
-  title         = "A Proposal to Add Explicit Congestion
-                   Notification ({ECN}) to {IP}",
-  howpublished  = "RFC 2481",
-  month         = jan,
-  year          = "1999"
-};
-
-
-% misc for a German regulation
-% In German, the first letters of nouns are capitalized, so we do so here.
-% From the June 2002 issue of "IEEE Journal in Selected Areas in
-% Communication", page 892, reference #9.
-@misc{IEEEexample:miscgermanreg,
-  title         = "{M}essung von {S}t{\"o}rfeldern an {A}nlagen 
-                   und {L}eitungen der {T}elekommunikation im
-                   {F}requenzbereich 9 {kHz} bis 3 {GHz}",
-  language      = "german",
-  howpublished  = "{M}e{\ss}vorschrift {R}eg {TP} {MV} 05",
-  organization  = "Regulierungsbeh{\"o}rde f{\"u}r {T}elekommunikation und
-                   {P}ost ({R}eg {TP})"
-};
-
-
-
-% Ways to handle things like CCSDS's Blue Books
-% journal article with a URL. However, this is not a very good approach
-% because the Blue Books are not really journals and the author field has
-% to be abused.
-% From the June 2002 issue of "IEEE Transactions on Information Theory",
-% page 1461, reference #7.
-@article{IEEEexample:bluebookarticle,
-  author        = "{Consulative Committee for Space Data Systems (CCSDS)}",
-  title         = "Telemetry Channel Coding",
-  journal       = "Blue Book",
-  number        = "4",
-  year          = "1999",
-  url           = "http://www.ccsds.org/documents/pdf/CCSDS-101.0-B-4.pdf"
-};
-
-
-% CCSDS's Blue Book handled as a book
-% However, it is not a good idea to have to use the author field for
-% an organization (done here because the book entry type requires an
-% author field).
-@book{IEEEexample:bluebookbook,
-  author        = "{Consulative Committee for Space Data Systems (CCSDS)}",
-  title         = "Telemetry Channel Coding",
-  series        = "Blue Book",
-  number        = "4",
-  publisher     = "CCSDS",
-  address       = "Newport Beach, CA",
-  year          = "1999",
-  url           = "http://www.ccsds.org/documents/pdf/CCSDS-101.0-B-4.pdf"
-};
-
-% CCSDS's Blue Book handled as a manual
-% This is a much better approach, but uses the howpublished field.
-@manual{IEEEexample:bluebookmanual,
-  title         = "Telemetry Channel Coding",
-  howpublished  = "ser. Blue Book, No. 4",
-  organization  = "Consulative Committee for Space Data Systems (CCSDS)",
-  address       = "Newport Beach, CA",
-  year          = "1999",
-  url           = "http://www.ccsds.org/documents/pdf/CCSDS-101.0-B-4.pdf"
-};
-
-
-
-% CCSDS's Blue Book handled as a standard
-% Probably the best approach for this particular case because the work
-% is standard related. Note that IEEE does not display the address for
-% standards.
-@standard{IEEEexample:bluebookstandard,
-  title         = "Telemetry Channel Coding",
-  howpublished  = "ser. Blue Book, No. 4",
-  organization  = "Consulative Committee for Space Data Systems (CCSDS)",
-  address       = "Newport Beach, CA",
-  type          = "Recommendation for Space Data System Standard",
-  number        = "101.0-B-4",
-  month         = May,
-  year          = "1999",
-  url           = "http://www.ccsds.org/documents/pdf/CCSDS-101.0-B-4.pdf"
-};
-
-
-
-
-
- 
-% An example of a IEEEtran control entry which can change some IEEEtran.bst
-% settings. An entry like this must be cited via \bstctlcite{} command
-% before the first real \cite{}. The same entry key cannot be called twice
-% (just like multiple \cite{} of the same entry key place only one entry
-% in the bibliography.)
-% The available control fields are:
-% 
-% CTLuse_article_number
-% "no" turns off the display of the number for articles.
-% "yes" enables
-%
-% CTLuse_paper
-% "no" turns off the display of the paper and type fields in inproceedings.
-% "yes" enables
-% 
-% CTLuse_forced_etal 
-% "no" turns off the forced use of "et al."
-% "yes" enables
-% 
-% CTLmax_names_forced_etal
-% The maximum number of names that can be present beyond which an "et al."
-% usage is forced. Be sure that CTLnames_show_etal (below)
-% is not greater than this value!
-% 
-% CTLnames_show_etal
-% The number of names that will be shown with a forced "et al.".
-% Must be less than or equal to CTLmax_names_forced_etal
-% 
-% CTLuse_alt_spacing 
-% "no" turns off the alternate interword spacing for entries with URLs.
-% "yes" enables
-% 
-% CTLalt_stretch_factor
-% If alternate interword spacing for entries with URLs is enabled, this is
-% the interword spacing stretch factor that will be used. For example, the
-% default "4" here means that the interword spacing in entries with URLs can
-% stretch to four times normal. Does not have to be an integer.
-% 
-% CTLdash_repeated_names
-% "no" turns off the "dashification" of repeated (i.e., identical to those
-% of the previous entry) names. IEEE normally does this.
-% "yes" enables
-% 
-% CTLname_format_string
-% The name format control string as explained in the BibTeX style hacking
-% guide.
-% IEEE style "{f.~}{vv~}{ll}{, jj}" is the default,
-% 
-% CTL_name_latex_cmd
-% A LaTeX command that each name will be fed to (e.g., "\textsc").
-% Leave empty if no special font is desired for the names.
-% The default is empty.
-% 
-% Those fields that are not to be changed can be left out or empty.
-@IEEEtranBSTCTL{IEEEexample:BSTcontrol,
-  CTLuse_article_number     = "yes",
-  CTLuse_paper              = "yes",
-  CTLuse_forced_etal        = "no",
-  CTLmax_names_forced_etal  = "10",
-  CTLnames_show_etal        = "1",
-  CTLuse_alt_spacing        = "yes",
-  CTLalt_stretch_factor     = "4",
-  CTLdash_repeated_names    = "yes",
-  CTLname_format_string     = "{f.~}{vv~}{ll}{, jj}",
-  CTLname_latex_cmd         = ""
-};
-
-
+@article{leblanc_molten_2010,
+	title = {Molten salt reactors: {A} new beginning for an old idea},
+	volume = {240},
+	issn = {0029-5493},
+	shorttitle = {Molten salt reactors},
+	url = {http://www.sciencedirect.com/science/article/pii/S0029549310000191},
+	doi = {10.1016/j.nucengdes.2009.12.033},
+	abstract = {Molten salt reactors have seen a marked resurgence of interest over the past decade, highlighted by their inclusion as one of six Generation IV reactor types. The most active development period however was between the mid 1950s and early 1970s at Oak Ridge National Laboratories (ORNL) and any new re-examination of this concept must bear in mind the far different priorities then in place. High breeding ratios and short doubling times were paramount and this guided the evolution of the Molten Salt Breeder Reactor (MSBR) program. As the inherent advantages of the molten salt concept have become apparent to an increasing number of researchers worldwide it is important to not simply look to continue where ORNL left off but to return to basics in order to offer the best design using updated goals and abilities. A major potential change to the traditional Single Fluid, MSBR design and a subject of this presentation is a return to the mode of operation that ORNL proposed for the majority of its MSR program. That being the Two Fluid design in which separate salts are used for fissile 233UF4 and fertile ThF4. Oak Ridge abandoned this promising route due to what was known as the “plumbing problem”. It will be shown that a simple yet crucial modification to core geometry can solve this problem and enable the many advantages of the Two Fluid design. In addition, another very promising route laid out by ORNL was simplified Single Fluid converter reactors that could obtain far superior lifetime uranium utilization than LWR or CANDU without the need for any fuel processing beyond simple chemistry control. Updates and potential improvements to this very attractive concept will also be explored.},
+	number = {6},
+	urldate = {2013-05-28},
+	journal = {Nuclear Engineering and Design},
+	author = {LeBlanc, David},
+	month = jun,
+	year = {2010},
+	keywords = {MSR, read},
+	pages = {1644--1656},
+	file = {newbeginning.pdf:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/CF65ST62/newbeginning.pdf:application/pdf;newbeginning.pdf:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/6NNAEPAG/newbeginning.pdf:application/pdf;ScienceDirect Full Text PDF:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/44BSHSZU/LeBlanc - 2010 - Molten salt reactors A new beginning for an old i.pdf:application/pdf;ScienceDirect Full Text PDF:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/Q94W579M/LeBlanc - 2010 - Molten salt reactors A new beginning for an old i.pdf:application/pdf;ScienceDirect Snapshot:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/TAMCTNDG/S0029549310000191.html:text/html;ScienceDirect Snapshot:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/U572AVDM/S0029549310000191.html:text/html}
+}
+
+@techreport{robertson_conceptual_1971,
+	title = {Conceptual {Design} {Study} of a {Single}-{Fluid} {Molten}-{Salt} {Breeder} {Reactor}.},
+	url = {http://www.osti.gov/scitech/biblio/4030941},
+	language = {English},
+	number = {ORNL--4541},
+	urldate = {2016-09-06},
+	institution = {comp.; Oak Ridge National Lab., Tenn.},
+	author = {Robertson, R. C.},
+	month = jan,
+	year = {1971},
+	keywords = {boilers, buildings, configuration, containment, control systems, coolant loops, design, Economics, fused salt fuel, maintenance, n38100*  --power reactor development, operation, reactor sites, waste disposal molten salt breeder reactor/design parameters for conceptual 1000 mw(e) single fluid, MSBR},
+	file = {3445600591394.pdf:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/RC7URKHP/3445600591394.pdf:application/pdf;Full Text PDF:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/DFSGI5SW/Robertson - 1971 - Conceptual Design Study of a Single-Fluid Molten-S.pdf:application/pdf;Snapshot:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/G8IEVM75/4030941.html:text/html}
+}
+
+@article{haubenreich_experience_1970,
+	title = {Experience with the {Molten}-{Salt} {Reactor} {Experiment}},
+	volume = {8},
+	issn = {00295450},
+	doi = {10.13182/NT8-2-118},
+	number = {2},
+	urldate = {2016-09-06},
+	journal = {Nuclear Technology},
+	author = {Haubenreich, Paul N. and Engel, J. R.},
+	month = feb,
+	year = {1970},
+	pages = {118--136},
+	file = {Haubenreich_Engel_MSREexperience.pdf:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/6EIEWPDA/Haubenreich_Engel_MSREexperience.pdf:application/pdf}
+}
+
+@article{park_whole_2015,
+	title = {Whole core analysis of molten salt breeder reactor with online fuel reprocessing},
+	issn = {0363907X},
+	shorttitle = {Whole core analysis of molten salt breeder reactor with online fuel reprocessing},
+	url = {http://doi.wiley.com/10.1002/er.3371},
+	doi = {10.1002/er.3371},
+	language = {en},
+	urldate = {2016-11-10},
+	journal = {International Journal of Energy Research},
+	author = {Park, Jinsu and Jeong, Yongjin and Lee, Hyun Chul and Lee, Deokjung},
+	month = jul,
+	year = {2015},
+	pages = {n/a--n/a},
+	file = {Whole core analysis of molten salt breeder reactor with online fuel reprocessing.pdf:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/TPRZSD4Q/Whole core analysis of molten salt breeder reactor with online fuel reprocessing.pdf:application/pdf}
+}
+
+@article{jeong_equilibrium_2016,
+	title = {Equilibrium core design methods for molten salt breeder reactor based on two-cell model},
+	volume = {53},
+	issn = {0022-3131, 1881-1248},
+	url = {http://www.tandfonline.com/doi/full/10.1080/00223131.2015.1062812},
+	doi = {10.1080/00223131.2015.1062812},
+	language = {en},
+	number = {4},
+	urldate = {2017-04-06},
+	journal = {Journal of Nuclear Science and Technology},
+	author = {Jeong, Yongjin and Park, Jinsu and Lee, Hyun Chul and Lee, Deokjung},
+	month = apr,
+	year = {2016},
+	pages = {529--536},
+	file = {Equilibrium core design methods for molten salt breeder reactor based on two cell model.pdf:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/4IRQCB82/Equilibrium core design methods for molten salt breeder reactor based on two cell model.pdf:application/pdf}
+}
+
+@techreport{powers_new_2013,
+	title = {A new approach for modeling and analysis of molten salt reactors using {SCALE}},
+	url = {https://www.osti.gov/scitech/biblio/22212758},
+	language = {English},
+	urldate = {2017-06-26},
+	institution = {American Nuclear Society, 555 North Kensington Avenue, La Grange Park, IL 60526 (United States)},
+	author = {Powers, J. J. and Harrison, T. J. and Gehin, J. C.},
+	month = jul,
+	year = {2013},
+	file = {Snapshot:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/RGBV8HHV/22212758.html:text/html}
+}
+
+@article{cui_transition_2017,
+	title = {Transition toward thorium fuel cycle in a molten salt reactor by using plutonium},
+	volume = {28},
+	issn = {1001-8042, 2210-3147},
+	url = {https://link.springer.com/article/10.1007/s41365-017-0303-y},
+	doi = {10.1007/s41365-017-0303-y},
+	abstract = {The molten salt reactor (MSR), as one of the Generation IV advanced nuclear systems, has attracted a worldwide interest due to its excellent performances in safety, economics, sustainability, and proliferation resistance. The aim of this work is to provide and evaluate possible solutions to fissile 233U233U{\textasciicircum}\{233\} {\textbackslash}hbox \{U\} production and further the fuel transition to thorium fuel cycle in a thermal MSR by using plutonium partitioned from light water reactors spent fuel. By using an in-house developed tool, a breeding and burning (B\&B) scenario is first introduced and analyzed from the aspects of the evolution of main nuclides, net 233U233U{\textasciicircum}\{233\} {\textbackslash}hbox \{U\} production, spectrum shift, and temperature feedback coefficient. It can be concluded that such a Th/Pu to Th/233UTh/233U{\textbackslash}hbox \{Th\}/{\textasciicircum}\{233\} {\textbackslash}hbox \{U\} transition can be accomplished by employing a relatively fast fuel reprocessing with a cycle time less than 60 days. At the equilibrium state, the reactor can achieve a conversion ratio of about 0.996 for the 60-day reprocessing period (RP) case and about 1.047 for the 10-day RP case. The results also show that it is difficult to accomplish such a fuel transition with limited reprocessing (RP is 180 days), and the reactor operates as a converter and burns the plutonium with the help of thorium. Meanwhile, a pre-breeding and burning (PB\&B) scenario is also analyzed briefly with respect to the net 233U233U{\textasciicircum}\{233\} {\textbackslash}hbox \{U\} production and evolution of main nuclides. One can find that it is more efficient to produce 233U233U{\textasciicircum}\{233\} {\textbackslash}hbox \{U\} under this scenario, resulting in a double time varying from about 1.96 years for the 10-day RP case to about 6.15 years for the 180-day RP case.},
+	language = {en},
+	number = {10},
+	urldate = {2017-09-18},
+	journal = {Nuclear Science and Techniques},
+	author = {Cui, De-Yang and Xia, Shao-Peng and Li, Xiao-Xiao and Cai, Xiang-Zhou and Chen, Jin-Gen},
+	month = oct,
+	year = {2017},
+	pages = {152},
+	file = {Full Text PDF:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/CSJN358R/Cui et al. - 2017 - Transition toward thorium fuel cycle in a molten s.pdf:application/pdf;Snapshot:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/HJUGJ2AV/s41365-017-0303-y.html:text/html}
+}
+
+@inproceedings{jeong_development_2014,
+	title = {Development of {Computer} {Code} {Packages} for {Molten} {Salt} {Reactor} {Core} {Analysis}},
+	author = {Jeong, Yongjin and Choi, Sooyoung and Lee, Deokjung},
+	month = sep,
+	year = {2014},
+	file = {Full Text PDF:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/QRWWV5RQ/Jeong et al. - 2014 - Development of Computer Code Packages for Molten S.pdf:application/pdf;Snapshot:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/Q8DACV96/272960553_Development_of_Computer_Code_Packages_for_Molten_Salt_Reactor_Core_Analysis.html:text/html}
+}
+
+@article{park_molten_2015,
+	title = {Molten {Salt} {Breeder} {Reactor} {Analysis} {Methods}},
+	url = {http://inis.iaea.org/Search/search.aspx?orig_q=RN:47023054},
+	language = {English},
+	urldate = {2017-09-25},
+	author = {Park, Jinsu and Jeong, Yongjin and Lee, Deokjung},
+	month = may,
+	year = {2015},
+	file = {Park Molten Salt Breeder Reactor Analysis Methods .pdf:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/2HJM6JTX/Park Molten Salt Breeder Reactor Analysis Methods .pdf:application/pdf;Snapshot:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/ZFWXJI6S/search.html:text/html}
+}
+
+@article{cui_possible_2017,
+	title = {Possible scenarios for the transition to thorium fuel cycle in molten salt reactor by using enriched uranium},
+	issn = {0149-1970},
+	url = {http://www.sciencedirect.com/science/article/pii/S0149197017302214},
+	doi = {10.1016/j.pnucene.2017.09.003},
+	abstract = {Molten Salt Reactor (MSR) with Th-233U fuel cycle attracts more and more attention with its excellent performance such as desirable breeding capacity, low waste production and high inherent safety. Considering the fact that there is no available 233U in the nature, it is necessary to analyze the fuel transition from enriched 235U/Th to 233U/Th and then give a flexible transition scenario for a graphite-moderated MSR. By employing an in-house developed tool which is based on SCALE6.1, two scenarios, a Breeding and Burning (B\&B) scenario and a Pre-breeding scenario, are studied. The evolution of the inventories of main nuclides, net 233U production and isothermal temperature coefficient are presented and discussed in the B\&B scenario. It is found that the fuel transition can be achieved smoothly by using enriched uranium with greater than 40\% concentration of 235U. The fuel transition can still be accomplished with 20\% enriched uranium but takes a long double time of about 79 years. Meanwhile, we perform an analysis of the Pre-breeding scenario and conclude that it is efficient to produce 233U and the double time ranges from 2.07 years for the 10-day reprocessing to 10.7 years for the 180-day reprocessing. A comparison of these two scenarios is conducted, which indicates that the B\&B scenario is more favorable than the Pre-breeding scenario from the aspect of resource utilization efficiency. Finally, a combined three-stage program for developing Th-based MSRs is proposed.},
+	urldate = {2017-09-25},
+	journal = {Progress in Nuclear Energy},
+	author = {Cui, D. Y. and Li, X. X. and Xia, S. P. and Zhao, X. C. and Yu, C. G. and Chen, J. G. and Cai, X. Z.},
+	month = sep,
+	year = {2017},
+	keywords = {Fuel cycle, enriched uranium, Molten salt reactor},
+	file = {ScienceDirect Full Text PDF:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/U89IA8CT/Cui et al. - 2017 - Possible scenarios for the transition to thorium f.pdf:application/pdf;ScienceDirect Snapshot:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/8WAITRKG/S0149197017302214.html:text/html;ScienceDirect Snapshot:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/R9JFCDSC/S0149197017302214.html:text/html}
+}
+
+@inproceedings{doe_technology_2002,
+	title = {A technology roadmap for generation {IV} nuclear energy systems},
+	booktitle = {Nuclear {Energy} {Research} {Advisory} {Committee} and the {Generation} {IV} {International} {Forum}},
+	author = {DoE, U. S.},
+	year = {2002},
+	pages = {48--52},
+	file = {genivroadmap2002.pdf:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/75S9TRA6/genivroadmap2002.pdf:application/pdf}
+}
+
+@article{forsberg_molten-salt-cooled_2003,
+	title = {Molten-{Salt}-{Cooled} {Advanced} {High}-{Temperature} {Reactor} for {Production} of {Hydrogen} and {Electricity}},
+	volume = {144},
+	issn = {0029-5450},
+	url = {https://doi.org/10.13182/NT03-1},
+	doi = {10.13182/NT03-1},
+	abstract = {The molten-salt-cooled Advanced High-Temperature Reactor (AHTR) is a new reactor concept designed to provide very high-temperature (750 to 1000°C) heat to enable efficient low-cost thermochemical production of hydrogen (H2) or production of electricity. This paper provides an initial description and technical analysis of its key features. The proposed AHTR uses coated-particle graphite-matrix fuel similar to that used in high-temperature gas-cooled reactors (HTGRs), such as the General Atomics gas turbine-modular helium reactor. However, unlike the HTGRs, the AHTR uses a molten-salt coolant and a pool configuration, similar to that of the General Electric Super Power Reactor Inherently Safe Module (S-PRISM) liquid-metal reactor. Because the boiling points for molten fluoride salts are near 1400°C, the reactor can operate at very high temperatures and atmospheric pressure. For thermochemical H2 production, the heat is delivered at the required near-constant high temperature and low pressure. For electricity production, a multireheat helium Brayton (gas-turbine) cycle, with efficiencies {\textgreater}50\%, is used. The low-pressure molten-salt coolant, with its high heat capacity and natural circulation heat transfer capability, creates the potential for robust safety (including fully passive decay-heat removal) and improved economics with passive safety systems that allow higher power densities and scaling to large reactor sizes [{\textgreater}1000 MW(electric)].},
+	number = {3},
+	urldate = {2018-01-05},
+	journal = {Nuclear Technology},
+	author = {Forsberg, Charles W. and Peterson, Per F. and Pickard, Paul S.},
+	month = dec,
+	year = {2003},
+	pages = {289--302},
+	file = {Full Text PDF:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/IT6HVA59/Forsberg et al. - 2003 - Molten-Salt-Cooled Advanced High-Temperature React.pdf:application/pdf;Snapshot:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/7Y7JLWDI/NT03-1.html:text/html}
+}
+
+@article{cherubini_co2_2011,
+	title = {{CO}2 emissions from biomass combustion for bioenergy: atmospheric decay and contribution to global warming},
+	volume = {3},
+	issn = {1757-1707},
+	shorttitle = {{CO}2 emissions from biomass combustion for bioenergy},
+	url = {http://onlinelibrary.wiley.com/doi/10.1111/j.1757-1707.2011.01102.x/abstract},
+	doi = {10.1111/j.1757-1707.2011.01102.x},
+	abstract = {Carbon dioxide (CO2) emissions from biomass combustion are traditionally assumed climate neutral if the bioenergy system is carbon (C) flux neutral, i.e. the CO2 released from biofuel combustion approximately equals the amount of CO2 sequestered in biomass. This convention, widely adopted in life cycle assessment (LCA) studies of bioenergy systems, underestimates the climate impact of bioenergy. Besides CO2 emissions from permanent C losses, CO2 emissions from C flux neutral systems (that is from temporary C losses) also contribute to climate change: before being captured by biomass regrowth, CO2 molecules spend time in the atmosphere and contribute to global warming. In this paper, a method to estimate the climate impact of CO2 emissions from biomass combustion is proposed. Our method uses CO2 impulse response functions (IRF) from C cycle models in the elaboration of atmospheric decay functions for biomass-derived CO2 emissions. Their contributions to global warming are then quantified with a unit-based index, the GWPbio. Since this index is expressed as a function of the rotation period of the biomass, our results can be applied to CO2 emissions from combustion of all the different biomass species, from annual row crops to slower growing boreal forest.},
+	language = {en},
+	number = {5},
+	urldate = {2018-01-08},
+	journal = {GCB Bioenergy},
+	author = {Cherubini, Francesco and Peters, Glen P. and Berntsen, Terje and Strømman, Anders H. and Hertwich, Edgar},
+	month = oct,
+	year = {2011},
+	keywords = {bioenergy, carbon neutral, CO2 accounting, global warming potential, LCA},
+	pages = {413--426},
+	file = {Full Text PDF:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/YWBXS3T8/Cherubini et al. - 2011 - CO2 emissions from biomass combustion for bioenerg.pdf:application/pdf;Snapshot:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/A8SB9ZVB/abstract.html:text/html}
+}
+
+@article{elsheikh_safety_2013,
+	title = {Safety assessment of molten salt reactors in comparison with light water reactors},
+	volume = {6},
+	issn = {1687-8507},
+	url = {http://www.sciencedirect.com/science/article/pii/S1687850713000101},
+	doi = {10.1016/j.jrras.2013.10.008},
+	abstract = {Molten salt reactors (MSRs) have a long history with the first design studies beginning in the 1950s at the Oak Ridge National Laboratory (ORNL). Traditionally these reactors are thought of as thermal breeder reactors running on the thorium to 233U cycle and the historical competitor to fast breeder reactors. In the recent years, there has been a growing interest in molten salt reactors, which have been considered in the framework of the Generation IV International Forum, because of their several potentialities and favorable features when compared with conventional solid-fueled reactors. MSRs meet many of the future goals of nuclear energy, in particular for what concerns an improved sustainability, an inherent safety with strong negative temperature coefficient of reactivity, stable coolant, low pressure operation that don not require expensive containment, easy to control, passive decay heat cooling and unique characteristics in terms of actinide burning and waste reduction, while benefiting from the past experience acquired with the molten salt technology. As the only liquid-fueled reactor concept, the safety basis, characteristics and licensing of an MSR are different from solid-uranium fueled light water reactors. In this paper, a historical review of the major plant systems in MSR is presented. The features of different safety characteristics of MSR power plant are reviewed and assessment in comparison to other solid fueled light water reactors LWRs.},
+	number = {2},
+	urldate = {2018-01-08},
+	journal = {Journal of Radiation Research and Applied Sciences},
+	author = {Elsheikh, Badawy M.},
+	month = oct,
+	year = {2013},
+	keywords = {LWR safety, Molten salt reactor safety, Nuclear reactor accident, Nuclear safety},
+	pages = {63--70},
+	file = {ScienceDirect Full Text PDF:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/R4PU37EJ/Elsheikh - 2013 - Safety assessment of molten salt reactors in compa.pdf:application/pdf;ScienceDirect Snapshot:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/98N9YQRW/S1687850713000101.html:text/html}
+}
+
+@techreport{noauthor_key_nodate,
+	title = {Key {World} {Energy} {Statistics} 2017},
+	url = {https://www.iea.org/publications/freepublications/publication/key-world-energy-statistics.html},
+	urldate = {2018-01-08},
+	institution = {IEA},
+	file = {KeyWorld2017.pdf:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/Y55L8WPP/KeyWorld2017.pdf:application/pdf;Publication\: Key World Energy Statistics:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/94PVCCG4/key-world-energy-statistics.html:text/html}
+}
+
+@techreport{noauthor_key_nodate-1,
+	type = {Text},
+	title = {Key {World} {Energy} {Statistics}, {Statistics} / {Key} {World} {Energy} {Statistics} / 2015},
+	url = {http://www.oecd-ilibrary.org/energy/key-world-energy-statistics-2015_key_energ_stat-2015-en},
+	abstract = {The IEA produced its first handy, pocket-sized summary of key energy data in 1997 and every year since then it has been more and more successful. Key World En},
+	language = {en},
+	urldate = {2018-01-08},
+	institution = {IEA},
+	file = {keyworld2015.pdf:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/R5R2I4HY/keyworld2015.pdf:application/pdf;Snapshot:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/XQ5WD37Z/key-world-energy-statistics-2015_key_energ_stat-2015-en.html:text/html}
+}
+
+@techreport{noauthor_world_2017,
+	title = {World {Energy} {Outlook} 2017},
+	url = {https://www.iea.org/weo2017/},
+	urldate = {2018-01-08},
+	institution = {IEA},
+	month = nov,
+	year = {2017},
+	file = {WEO 2017:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/ILRJTFMD/weo2017.html:text/html}
+}
+
+@mastersthesis{pettersen_coupled_2016,
+	title = {Coupled multi-physics simulations of the {Molten} {Salt} {Fast} {Reactor} using coarse-mesh thermal-hydraulics and spatial neutronics},
+	school = {MSc thesis, September 2016 (PDF)},
+	author = {Pettersen, Eirik Eide and Mikityuk, Konstantin},
+	year = {2016},
+	file = {Fulltext:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/PA885TB5/Pettersen and Mikityuk - 2016 - Coupled multi-physics simulations of the Molten Sa.pdf:application/pdf;Snapshot:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/S7SERYFF/Pettersen and Mikityuk - 2016 - Coupled multi-physics simulations of the Molten Sa.pdf:application/pdf}
+}
+
+@inproceedings{gentry_initial_2017,
+	address = {Washington D.C., United States},
+	title = {Initial {Benchmarking} of {ChemTriton} and {MPACT} {MSR} {Modeling} {Capabilities}},
+	booktitle = {Transactions of the {American} {Nuclear} {Society}},
+	publisher = {American Nuclear Society, 555 North Kensington Avenue, La Grange Park, IL 60526 (United States)},
+	author = {Gentry, Cole and Betzler, Benjamin and Collins, Benjamin},
+	month = nov,
+	year = {2017},
+	file = {414.pdf:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/2VF8QHCA/414.pdf:application/pdf}
+}
+
+@article{ridley_method_2017,
+	title = {A method for predicting fuel maintenance in once-through {MSRs}},
+	volume = {110},
+	issn = {0306-4549},
+	url = {http://www.sciencedirect.com/science/article/pii/S030645491730021X},
+	doi = {10.1016/j.anucene.2017.06.043},
+	abstract = {Liquid fuel molten salt reactors allow reactivity control by material addition. This paper presents a method to adjust material flows in a molten salt reactor to keep the core critical, and to maintain desired reduction-oxidation potential in the core salt melt. The method is aimed at low-enriched uranium fueled thermal systems. It is developed as a Python library and uses Serpent2 Monte-Carlo transport and depletion code. A toy 300MW(th) reactor with a FLiBe carrier salt is employed to demonstrate the performance of the method over 10 full power years. Results of the calculation are presented, including material flows, conversion ratio, effective delayed neutron fraction, and expected limits on trifluoride concentrations and graphite lifetime are investigated. This method lays a foundation for future studies including fuel cycle performance of molten salt reactors and dynamic behavior of the core during depletion.},
+	urldate = {2018-01-09},
+	journal = {Annals of Nuclear Energy},
+	author = {Ridley, Gavin and Chvala, Ondrej},
+	month = dec,
+	year = {2017},
+	keywords = {Chemistry control, Depletion, DMSR, Molten salt reactor, On-line refueling, Serpent},
+	pages = {265--281},
+	file = {ScienceDirect Full Text PDF:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/3QS83BUB/Ridley and Chvala - 2017 - A method for predicting fuel maintenance in once-t.pdf:application/pdf;ScienceDirect Snapshot:/home/andrei2/.mozilla/firefox/59pwvest.default/zotero/storage/PZAPZZ2R/S030645491730021X.html:text/html}
+}
