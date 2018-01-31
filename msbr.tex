@@ -10,8 +10,13 @@
 \makeatletter
 
 \usepackage{setspace}
-\usepackage{epsfig}  % for figures
-%\usepackage{graphicx}  % another package that works for figures
+%\usepackage{epsfig}  % for figures
+\usepackage{graphicx}  % another package that works for figures
+\usepackage{placeins}
+\usepackage{caption}  % allows center figures caption
+\usepackage{booktabs} % nice rules (thick lines) for tables
+\usepackage{array}
+\graphicspath{{figures/}}
 %\usepackage{subfigure}  % for subfigures
 \usepackage{amsmath}  % for math spacing
 %\usepackage{amssymb}  % for math spacing
@@ -35,13 +40,13 @@
 % Advisor name is required for
 % - doctoral students for the ProQuest abstract
 % - master's students who do not have a master's committee
-\advisor{Professor Kathryn D. Huff}
+%\advisor{Professor Kathryn D. Huff}
 
 % Uncomment the \committee command for
 % - all doctoral students
 % - master's students who have a master's committee
-%\committee{Professor Firstname Lastname, Chair\\
-%        Professor Firstname Lastname} % etc.
+\committee{Professor Kathryn Huff, Chair\\
+        Professor Tomasz Kozlowski} % etc.
 
 \begin{document}
 \include{acros}
@@ -66,10 +71,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DEDICATION
 %
-%\begin{dedication}
-% Whatever dedication you want.
-%To my parents, for their love and support.
-%\end{dedication}
+\begin{dedication}
+Dedicated to the memory of my father, Igor Rykhlevskii, who always believed in my ability to succeed in the academic arena.
+\end{dedication}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ACKNOWLEDGMENTS
@@ -77,8 +81,7 @@
 % Put acknowledgments in a file called "ack.tex" and it'll be inputted here.
 %\begin{acknowledgments}
 %\input{ack}
-%\end{acknowledgments}
-
+%\end{acknowledgments}																																				
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TABLE OF CONTENTS
 %
@@ -124,13 +127,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % INSERT REAL CONTENT HERE
 %
-\include{intro}	% for INTRODUCTION in "intro.tex"
+%\include{intro}	% for INTRODUCTION in "intro.tex"
 \include{chapter1}
 \include{chapter2}
 \include{chapter3}
 \include{chapter4}
 \include{concl}
-%\include{concl}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
