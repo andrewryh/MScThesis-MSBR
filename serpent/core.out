@@ -69,7 +69,7 @@
 
  Nuclide    1 / 11 : 3007.09c -- lithium 7 (Li-7)
 
- Pointers                     : 428384 3575
+ Pointers                     : 428740 3575
  Primary type                 : Transport
  Nuclide ZAI                  : 30070
  Library ID                   : 09c
@@ -158,7 +158,7 @@
 
  Nuclide    2 / 11 : 4009.09c -- beryllium 9 (Be-9)
 
- Pointers                     : 434287 4127
+ Pointers                     : 434643 4127
  Primary type                 : Transport
  Nuclide ZAI                  : 40090
  Library ID                   : 09c
@@ -220,7 +220,7 @@
 
  Nuclide    3 / 11 : 6012.09c -- carbon 12 (C-12)
 
- Pointers                     : 443170 5231
+ Pointers                     : 443526 5231
  Primary type                 : Transport
  Nuclide ZAI                  : 60120
  Library ID                   : 09c
@@ -301,7 +301,7 @@
 
  Nuclide    4 / 11 : 6012.09s -- carbon 12 (C-12)
 
- Pointers                     : 459058 5231
+ Pointers                     : 459414 5231
  Primary type                 : Transport
  Nuclide ZAI                  : 60120
  Library ID                   : 09s
@@ -385,7 +385,7 @@
 
  Nuclide    5 / 11 : 9019.09c -- fluorine 19 (F-19)
 
- Pointers                     : 431590 6611
+ Pointers                     : 431946 6611
  Primary type                 : Transport
  Nuclide ZAI                  : 90190
  Library ID                   : 09c
@@ -467,7 +467,7 @@
 
  Nuclide    6 / 11 : 24000.09c -- natural chromium (Cr-nat)
 
- Pointers                     : 450685 18755
+ Pointers                     : 451041 18755
  Primary type                 : Transport
  Nuclide ZAI                  : 240000
  Library ID                   : 09c
@@ -564,7 +564,7 @@
 
  Nuclide    7 / 11 : 26000.09c -- natural iron (Fe-nat)
 
- Pointers                     : 454462 20411
+ Pointers                     : 454818 20411
  Primary type                 : Transport
  Nuclide ZAI                  : 260000
  Library ID                   : 09c
@@ -662,7 +662,7 @@
 
  Nuclide    8 / 11 : 28000.09c -- natural nickel (Ni-nat)
 
- Pointers                     : 445795 22619
+ Pointers                     : 446151 22619
  Primary type                 : Transport
  Nuclide ZAI                  : 280000
  Library ID                   : 09c
@@ -767,7 +767,7 @@
 
  Nuclide    9 / 11 : 42000.09c -- natural molybdenum (Mo-nat)
 
- Pointers                     : 450148 39731
+ Pointers                     : 450504 39731
  Primary type                 : Transport
  Nuclide ZAI                  : 420000
  Library ID                   : 09c
@@ -819,7 +819,7 @@
 
  Nuclide   10 / 11 : 90232.09c -- thorium 232 (Th-232)
 
- Pointers                     : 435544 104039
+ Pointers                     : 435900 104039
  Primary type                 : Transport
  Nuclide ZAI                  : 902320
  Library ID                   : 09c
@@ -923,7 +923,7 @@
 
  Nuclide   11 / 11 : 92233.09c -- uranium 233 (U-233)
 
- Pointers                     : 439753 105971
+ Pointers                     : 440109 105971
  Primary type                 : Transport
  Nuclide ZAI                  : 922330
  Library ID                   : 09c
