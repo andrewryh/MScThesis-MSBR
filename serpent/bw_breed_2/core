@@ -94,12 +94,21 @@ dx 0.0 345.0 345
 dy 0.0 345.0 345
 dz 0.0 449.58 1
 
-%----Breeding in thermal spectrum
+%----Breeding in resonances region
 mat TH232 1.0 90232.09c 1.0
-det breeding
+det breeding_res
 dm fuel
 dr 102 TH232 %===capture===
 de 4         %===resonances
+dx 0.0 345.0 345
+dy 0.0 345.0 345
+dz 0.0 449.58 1
+
+%----Breeding overall
+det breeding
+dm fuel
+dr 102 TH232 %===capture===
+de 3         %===overall spectrum
 dx 0.0 345.0 345
 dy 0.0 345.0 345
 dz 0.0 449.58 1

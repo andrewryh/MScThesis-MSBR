@@ -1,8 +1,8 @@
-set title "BW saltproc tests ORNL case, 3-days step, power 2.25MW,0.232% U233"
+set title "BW saltproc tests ORNL case, 3-d step, power2.25GW,0.25%U233, plots"
 
 include "/u/sciteam/rykhlevs/geometry/whole_core_axial_ref"
 
-% --- Fuel (LiF-BeF2-ThF4-233UF4-239PuF3 72-16-12-0.232-0.0006 mole %) Table 3.7 Robertson:
+% --- Fuel (LiF-BeF2-ThF4-233UF4 72-16-12-0.25 mole %) Table 3.7 Robertson:
 include "fuel_comp"
 % --- Moderator graphite:
 mat moder    -1.843 rgb 68 1 84 tmp 900 moder gr 6000 6000.09c    -1.0 % Robertson Tabl. S.1
@@ -31,7 +31,7 @@ set nfylib "/projects/sciteam/bahg/serpent/xsdata/jeff312/sss_jeff33.nfy"       
 
 % --- Black boundary condition 3D 1:
 set bc 1
-
+set nbuf 10
 % --- group constant generation:
 
 % universe = 0 (homogenization over all space)
@@ -47,7 +47,7 @@ set bc 1
 
 % --- Neutron population and criticality cycles:
 
-set pop 70000 200 20 
+set pop 50000 100 20 
 
 % --- Geometry and mesh plots:
 
@@ -68,8 +68,8 @@ set pcc     1  % Predictor-corrector calculation on
 %set rfw 1 rfw_mat_binary_file %Write material compositions into binary restart file
 
 % --- Irradiation cycle:
-% First cycle (10% of power, only gas removing)
-set power 225000000.0 % 0.225 GW(th)
+% First cycle (100% of power)
+set power 2.25E+9 % 2.25 GW(th)
 %set powdens 6.666E-3    %22.2kW/l Robertson 6.666E-3
 set fmass 1.3037E+6      % Fissile mass in salt, Powers 'Reactor physics anlysis' 2013
 
@@ -102,3 +102,88 @@ daytot
 %---- Print compositions of depleted materials after each step
 set printm 1 0.0
 
+%_____________________ Output_____________%
+
+% --- Detector energy grid (uniform lethargy):
+ene tot 3 1000 1E-9 12.0
+ene 2 1 1E-11 0.625E-6 % Detector energy grid (thermal single bin)
+ene 1 1 0.625E-6 12.0  % Fast energy grid single bin
+ene 3 1 1E-11 12.00    % One total single bin
+ene 4 1 1E-5 5E-3      % Resonances egion for Th-232 (MeV)
+% --- Flux per lethargy all over core
+det avrg de tot dt -3
+
+% --- Flux per lethargy in zone I (lattice 1):
+det 1 de tot du 1 dt -3
+
+% --- Flux per lethargy in zone II (lattice 2):
+det 2 de tot du 2 dt -3
+
+%----Power generation in 2-D 30x30 bins
+det powxy
+dr -8 fuel
+de 3
+dx 0.0 345.0 345
+dy 0.0 345.0 345
+dz 0.0 449.58 1
+
+%----Fissions generation in 2-D 30x30 bins
+det fisxy
+dr -6 fuel
+de 3
+dx 0.0 345.0 345
+dy 0.0 345.0 345
+dz 0.0 449.58 1
+
+%----Breeding in resonances region
+mat TH232 1.0 90232.09c 1.0
+det breeding_res
+dm fuel
+dr 102 TH232 %===capture===
+de 4         %===resonances
+dx 0.0 345.0 345
+dy 0.0 345.0 345
+dz 0.0 449.58 1
+
+%----Breeding overall
+det breeding
+dm fuel
+dr 102 TH232 %===capture===
+de 3         %===overall spectrum
+dx 0.0 345.0 345
+dy 0.0 345.0 345
+dz 0.0 449.58 1
+
+%========== Total flux radial
+det flux_rad
+de 3
+dx 0.0 345.0 345
+
+%=============Total flux 2D 345x345 pins for normalization
+det fluxxy
+de 3
+dx 0.0 345.0 345
+dy 0.0 345.0 345
+dz 0.0 449.58 1
+
+%--- Thermal flux
+det flux_rad2
+de 2
+dx 0.0 345.0 345
+%---Fast flux
+det flux_rad1
+de 1
+dx 0.0 345.0 345
+
+%====== Total axial flux
+det flux_axial
+de 3
+dz -50.0 450.0 200
+%========Thermal
+det flux_axial2
+de 2
+dz -50.0 450.0 200
+%=======Fast
+det flux_axial1
+de 1
+dz -50.0 450.0 200
