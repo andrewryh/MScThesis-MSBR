@@ -1,158 +1,214 @@
-\chapter[Online reprocessing simulation]{Online reprocessing simulation}
+\chapter[Steady-state full-core MSBR benchmark]{Steady-state full-core MSBR benchmark}
 
-\section{Fuel salt processing systems}
-\subsection{Fuel salt chemical processing facility}
-All liquid-fueled \gls{MSR} designs involve varying levels of online fuel processing. Minimally, volatile gaseous fission products (e.g. Kr, Xe) escape from the fuel salt during routine reactor operation and must be captured. Additional systems might be used to intensify those elements removal rate. Most designs also call for the removal of rare earth metals from the core since these metals act as neutron poisons. Some designs suggest more complex processing elements list (figure ~\ref{fig:periodic_tab}), including the temporary removal of protactinium from the salt or other regulations of the actinide inventory in the fuel salt \cite{ahmad_neutronics_2015}.
+\section{SERPENT 2 code overview}
+
+SERPENT is a continuous-energy Monte Carlo neutronics code capable of solving the neutron transport problem by tracking individual neutrons within the problem geometry and using stochastic method to determine chain of events for each neutron \cite{leppanen_serpent_2015}. SERPENT has been under active development at the VTT Technical Research Centre of Finland from 2004, where it was initially conceived as a tool to simplify group constant generation in a high-fidelity Monte Carlo environment. During this period, SERPENT has seen as widely used transport code and number of users grows steadly. Now SERPENT used by more than 500 registered individuals in 155 organizations located in 37 countries around the world. This success is not only a result of the simple and naive cross section generation procedures, but also its high-performance parallelization and user-friendly usage. The burnup calculation capability in SERPENT was established early on, and is fully based on built-in calculation routines, without using any external solvers. A restart features allows performing fuel shuffling or applying any modifications in the input by dividing the calculation into several parts which is crucial for online reprocessing simulations.
+
+Latest version, SERPENT 2, supports advanced geometry types and has advanced burnup capabilities, including online refueling capabilities which are necessarily for neutronic computations of pebble-bed reactors and liquid-fueled \glspl{MSR} \cite{aufiero_extended_2013}. Unfortunately, build-in online refueling features still under active development and do not available for ordinary users. Furthermore, recently was demonstrated multi-physics simulations using SERPENT 2, i.e. coupled calculations with thermal hydraulics, \gls{CFD} and fuel performance codes \cite{leppanen_numerical_2015}. Two-way coupling to thermal hydraulics, CFD and fuel performance codes has been a major topic in SERPENT development for the past several years and operate on two levels: 	internal coupling to built-in solvers for fuel behavior and thermal hydraulics, and external coupling via a universal multi-physics interface. 
+
+SERPENT 2 can be effectively run in parallel on computer clusters and multi-core workstations. Parallelization at core level is handled by thread-based OpenMP, which has the advantage that all processsors use shared memory space. Calculations can be divided into several nodes by distributed-memory \gls{MPI} parallelization. SERPENT 2  is an improvement upon SERPENT 1, and contains a complete redesign of memory management using hybrid OpenMP \cite{dagum_openmp:_1998} + \gls{MPI} parallelization.  This hybrid parallelization is important in depletion calculations using computer clusters with multiple nodes, and allows to achieve significant speed-up in depletion calculations on computer clusters with more than 4'000 cores \cite{leppanen_serpent_2015-1}. 
+
+All calculations presented in this thesis were performed using SERPENT 2 version 2.1.30 on Blue Waters’ XE6 nodes. For cross section generation, JEFF-3.1.2 was employed \cite{oecd/nea_data_bank_jeff-3.1.2_2014}. 
+
+\section{Molten Salt Breeder Reactor description}
+
+The \gls{MSBR} vessel has a diameter of 680 cm and a height of 610 cm. It contains a molten fluoride fuel-salt mixture that generates heat in the active core region and transports that heat to the primary heat exchanger by way of 
+the primary salt pump. In the active core region, the salt flows through channels in moderating and reflecting graphite blocks. Salt at about 565$^{\circ}$C enters the central manifold at the bottom via four 40.64-cm-diameter nozzles and flows through the lower plenum and upward via the channels in the graphite to exit at the top at about 704$^{\circ}$C through four equally spaced nozzles which connect to the salt-suction pipes leading to primary circulation pumps. The fuel salt drain lines connects to the bottom of the reactor vessel inlet manifold.
+
+Reactor graphite experiences significant dimensional changes due to neutron irradiation, consequently, the reactor core was designed for periodic replacement. The reference \gls{MSBR} design has an average core power density of about 6.666 W/g, which, based in the irradiation behavior of materials obtained from \gls{MSRE}, allows to achieve useful core graphite life of about 4 years and reflector graphite 	life during 30-year lifetime of plant \cite{robertson_conceptual_1971}.
+
+Moreover, it was decided to remove and install the core graphite as an assembly rather than by individual blocks, because it relatively quickly, easier for maintenance personnel and has lower probability of radioactive elements escape. In addition, handling the core as an assembly also allows the replacement core to be carefully preassembled and tested under factory conditions.
+
+The core has two radial zones bounded by a solid cylindrical graphite reflector 
+and the vessel wall. The \gls{MSBR} core consists of two different zones. The central zone, zone I, in which 13\% of the volume is fuel salt and 87\% graphite. 
+Zone I composed of 1'320 graphite cells, 2 graphite control rods, and 
+2 safety rods. The under-moderated zone, zone 
+II, with 37\% fuel salt, and radial reflector, surrounds the zone I core region 
+and serves to diminish neutron leakage. Zones I and II are surrounded radially and axially by fuel salt. This space for fuel is necessary for injection and flow of molten salt. Fig.~\ref{fig:ref_plan_msbr} and \ref{fig:ref_sect_msbr} demonstrate \gls{MSBR} vessel, core configuration, ``fission" (zone I) and ``breeding" (zone II) regions position inside the vessel.
+
+\begin{figure}[hbp!] % replace 't' with 'b' to 
+  \centering
+  \vspace{-0.3em}
+  \includegraphics[width=\textwidth]{plan_view_vessel.png}
+  \caption{Plan view of \gls{MSBR} vessel \cite{robertson_conceptual_1971}.}
+  \vspace{-0.6em}
+  \label{fig:ref_plan_msbr}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[hbp!] % replace 't' with 'b' to 
+  \centering
+  \vspace{-0.3em}
+  \includegraphics[width=\textwidth]{elev_view_vessel.png}
+  \caption{Sectional elevation of \gls{MSBR} vessel \cite{robertson_conceptual_1971}.}
+  \vspace{-0.6em}
+  \label{fig:ref_sect_msbr}
+\end{figure}
+\FloatBarrier
+
+There are eight graphite slabs with a width of 15.24 cm in zone II one to each other, one of which is illustrated in Fig.~\ref{fig:detail_plan_view}. The holes in the centers are for the core lifting rods used during the core replacement operations. These holes also allow a portion of the fuel salt to flow to the top of the vessel for cooling the top head and axial reflector. Fig.~\ref{fig:detail_plan_view} also demonstrates the 5.08-cm-wide annular space between the removable core graphite in zone II-B and the permanently mounted reflector graphite. This annulus, 100\% constists of fuel salt, provides space for moving the core assembly, helps compensate the out-of-roundness dimensions of the reactor vessel, and serves to reduce the damage flux at the surface of the graphite reflector blocks.
+
+\begin{figure}[hbp!] % replace 't' with 'b' to 
+  \centering
+  \vspace{-0.3em}
+  \includegraphics[width=\textwidth]{reflector_elements_ref.png}
+  \caption{Detailed plan view of graphite reflector and moderator elements \cite{robertson_conceptual_1971}.}
+  \vspace{-0.6em}
+  \label{fig:detail_plan_view}
+\end{figure}
+\FloatBarrier
+
+\subsection{Core zone I}
+The central region of the core, called zone I, is made up of graphite elements, each $10.16$cm$\times$10.16cm$\times$396.24cm. In zone I, 13\% of the volume is fuel salt and 87\% is graphite. Zone I is composed of 1'320 graphite cells and 4 channels for control rods: two for graphite rods which both regulate and shim during normal operation, and two for backup safety rods consisting of boron carbide clad to assure sufficient negative reactivity for emergency situations.
+
+These graphite elements have a mostly rectangular shape with lengthwise ridges at each corner that leave space for salt flow elements. Various element sizes reduce the peak damage flux and power density in the center of the core prevent local graphite damage. Zone I is well-moderated which is necessarily to achieve desired fission power density. Figure~\ref{fig:I_element_ref} demonstrates the elevation and sectional views of graphite elements of zone I \cite{robertson_conceptual_1971} and these elements SERPENT model \cite{rykhlevskii_full-core_2017}.
+
+\subsection{Core zone II}
+The undermoderated zone, zone II, surrounds zone I. Combined with the bounding radial reflector, zone II serves to diminish neutron leakage. This zone is formed of two kinds of elements: elements like those in zone I with a larger channel diameter (zone II-A), and radial graphite slats (zone II-B). 
+
+Zone II has 37\% fuel salt by volume and each element has a fuel channel 
+diameter of 6.604cm. It is divided into two different zones: zone II-A and zone 
+II-B. The graphite elements for zone II-A are prismatic and have elliptical-shaped dowels running axially between the prisms and needed to isolate the fuel salt flow in zone I from that in zone II. Fig.~\ref{fig:II_element_ref} shows shape and dimensions of these graphite elements and their SERPENT model. Zone II-B elements are rectangular slats spaced far enough apart to provide the 0.37 fuel salt volume fraction. The reactor zone II-B graphite 5.08cm-thick slats vary in the radial dimension (average width is 26.67cm) as shown in figure~\ref{fig:detail_plan_view}. Zone II serves as ``blanket" to achieve the best ``performance" associated with a high breeding ratio and a low fissile inventory. The neutron energy spectrum in zone II is made harder, to enhance the rate of thorium resonance capture relative to the fission rate, thus limiting the neutron flux in the outer core zone and reducing the neutron leakage \cite{robertson_conceptual_1971}. 
+
+\begin{figure}[hbp!] % replace 't' with 'b' to 
+  \centering
+  \vspace{-0.3em}
+  \includegraphics[width=1.04\textwidth]{zone_I_element_ref.png}
+  \caption{Graphite moderator elements for zone I \cite{robertson_conceptual_1971,rykhlevskii_full-core_2017}.}
+  \vspace{-0.6em}
+  \label{fig:I_element_ref}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[hbp!] % replace 't' with 'b' to 
+  \centering
+  \vspace{-0.3em}
+  \includegraphics[width=1.04\textwidth]{zone_II_element_ref.png}
+  \caption{Graphite moderator elements for zone II-A \cite{robertson_conceptual_1971,rykhlevskii_full-core_2017}.}
+  \vspace{-0.6em}
+  \label{fig:II_element_ref}
+\end{figure}
+\FloatBarrier
+
+\section{Existing full-core MSBR models}
+There are few recent studies presented full-core \gls{MSBR} models for neutronics analysis. First, MCNP6 model developed by Park \emph{et al.} for burn-up computations and safety parameters analysis \cite{park_whole_2015}. This model has significant simplifications in zone II-B graphite elements geometry, and completely ignore lengthwise ridges at each corner of cell. Figure~\ref{fig:park} shows simplifications in geometry of the model.  More recently Skirpan \emph{et al.} built a model of the core using Shift \cite{pandya_implementation_2016} to compare fidelity of one-cell, two-cell and full-core models of \gls{MSBR} \cite{skirpan_fuel_2017}. In this model complex cell geometry in zone I and zone II-A were approximated to sligtly rotated square cylinder (figure~\ref{fig:skirpan_cell}). Moreover, as can be seen from figure~\ref{fig:skirpan_plan}, zone II-B described using horizontal, vertical and 45$^\circ$-degree graphite elements, that might significantly distort neutron flux and reacton rates in that region, and, consequently, misrepresent breeding parameters of the whole reactor.
+
+In sum: full-core Monte Carlo model with sufficient fidelity necessarily for online reprocessing and refueling simulation. Moreover, high-fidelity model essential for problem-oriented homogenized nuclear data (multi-group cross sections and diffusion constants) generation for deterministic reactor codes, and for coupled simulations.
+
+\begin{figure}[hbp!] % replace 't' with 'b' to 
+  \centering
+  \vspace{-0.3em}
+  \includegraphics[width=\textwidth]{park_detailed_view.png}
+  \caption{Graphite moderator elements  for zone II and reflector from Park \gls{MSBR} model (MCNP6) \cite{park_whole_2015}.}
+  \vspace{-0.6em}
+  \label{fig:park}
+\end{figure}
+\FloatBarrier
 
 \begin{figure}[htp!] % replace 't' with 'b' to 
   \centering
   \vspace{-0.3em}
-  \includegraphics[width=1.05\textwidth]{periodic_map.png}
-  \caption{Processing options for \gls{MSR} fuels \cite{ahmad_neutronics_2015}.}
+  \includegraphics[width=0.95\textwidth]{skirpan_cell.png}
+  \caption{Geometry of an MSBR fuel channel (left) approximated with a simple geometric model (center) to calculate appropriate volumes to reduce to a two-region model (right) \cite{skirpan_fuel_2017}.}
   \vspace{-0.6em}
-  \label{fig:periodic_tab}
+  \label{fig:skirpan_cell}
 \end{figure}
-\FloatBarrier
 
-In the one-fluid \gls{MSBR}, considered in this work, thorium, uranium, protactinium, and fission products are all mixed together in a single fluoride salt (FLiBe). Separation of thorium from lanthanide (atomic numbers 57 through 71) fission products is rather challenging because of their chemical similarities. 
-
-Principal scheme of \gls{MSBR} reprocessing facility has shown on Figure~\ref{fig:material_flow}. Fuel salt was first held up for cooling and decay of the shortest lived fission products, then directed to the primary fluorinator, where most of the uranium was removed by fluorination to UF$_6$ using gaseous molecular form of fluorine (F$_2$) as the fluorination agent. After that the salt was routed to an extraction column where mixture containing metallic bismuth, lithium and thorium were contacted with the salt. The remaining uranium and protactinium were reductively extracted to the bismuth, leaving a salt that only contained fission products dissolved in carrier salt (base composition of LiF-BeF$_2$-ThF$_4$). This salt entered another reductive extraction column where bismuth containing lithium separated from the salt lanthanide fission products and some thorium. The salt then went through a reduction column where UF$_6$ was reduced to UF$_4$ in the salt, refueling it and preparing it for return to the reactor. Refill BeF$_2$ and ThF$_4$ were also added and all residual bismuth was removed from the salt. After a final cleanup step and valence adjustment the purified salt was returned to the reactor \cite{carter_design_1972},\cite{noauthor_one-fluid_nodate}.
-
-The bismuth accommodating some uranium and protactinium was routed to a hydrofluorination column where the metallic solutes in the bismuth were oxidized into their fluoride forms in the presence of a decay salt. The decay salt, containing UF$_4$, PaF$_4$, and ThF$_4$ passed into a decay tank where $^{233}$Pa was decaying to $^{233}$U. This uranium generated by protactinium decay was removed through fluorination to UF$_6$ and directed to the reduction column to refuel the purified fuel salt. A hydrofluorinator and a fluorinator have capability to remove about \textbf{95\%} of the uranium from the stream.
-
-The fully processed salt, on its way back to the reactor, has uranium added from the protactinium decay tank at the rate required to maintain or adjust the uranium concentration in the reactor (and, consequently, control the reactivity). This is performed by contacting the salt with UF$_6$ and hydrogen to produce UF$_4$ in the salt and HF gas \cite{robertson_conceptual_1971}.
-
-\begin{figure}[htp!] % replace 't' with 'b' to 
+\begin{figure}[hbp!] % replace 't' with 'b' to 
   \centering
   \vspace{-0.3em}
-  \includegraphics[width=1.05\textwidth]{flowsheet.pdf}
-  \caption{Detailed block diagram of chemical processing scheme for one-fluid \gls{MSBR} \cite{robertson_conceptual_1971},\cite{noauthor_one-fluid_nodate}.}
+  \includegraphics[width=0.7\textwidth]{skirpan_plan_view.png}
+  \caption{Plan view of the \gls{MSBR} full-core transport model at core horizontal midplane \cite{skirpan_fuel_2017}.}
   \vspace{-0.6em}
-  \label{fig:material_flow}
+  \label{fig:skirpan_plan}
 \end{figure}
 \FloatBarrier
 
-\subsection{Gas separation system}
-Volatile gaseous fission products (e.g. Kr, Xe) must be removed from the fuel salt to avoid reactor poisoning especially during starup and maneuvering. This is particularly true for $^{135}$Xe, with its very large absorption cross section. Tritium, xenon, and krypton are sparged from the fuel salt by helium introduced in a bypass stream by a bubble generator and subsequently removed by a gas separator. Indeed, noble gases, because of their exceptional insolubility in the salt, will migrate promptly to any gaseous interface available. Because they form a true solution in salt, they will migrate in accordance with the conventional laws of mass transfer.
-If tiny helium bubbles are circulated with the fuel salt, they will absorb xenon and krypton fission products. The fission-product-rich bubbles of helium may then be separated from the salt and discharged to the off-gas system. Xenon migration to the circulating bubbles is in competition with xenon migration to the porous moderator graphite. The graphite is especially of concern because it absorbs xenon and holds it in the core which leads to parasitic neutron absorption. In \gls{ORNL} report \cite{robertson_conceptual_1971} in Appendix A it is concluded that, with moderate success of the coated-graphite program, the 0.5\% target value for $^{135}$Xe poison fraction can be achieved when circulating helium bubbles 0.508mm in diameter. This is accomplished by bypassing 10\% of the fuel salt from
-the pump discharge through a bubble separator to remove the xenon bubbles, then through a clean helium bubble generator for replenishment of helium bubbles, and back into the pump suction, as shown in Figure~\ref{fig:gas_removal_system}. The average residence time of a bubble in the fuel loop would be 10 full cycles.
+\section{SERPENT 2 model}
 
-\begin{figure}[htp!] % replace 't' with 'b' to 
+To represent complex irregular \gls{MSBR} core geometry advanced geometry surfaces in SERPENT was employed. Fig.~\ref{fig:serpent_plan_view} shows the plan view of the whole-core configuration at the expected reactor operational level when both graphite control rods are fully inserted, and the safety rods are fully withdrawn. The safety rods only get inserted during an accident and were not considered in this model. Another feature of the \gls{MSBR}, its circulating liquid fuel and corresponding delayed neutron precursor drift, is not treated
+here also. 
+
+Fig.~\ref{fig:serpent_sectional_view} shows the longitudinal section of the reactor. The violet color represents bare graphite, and the yellow represents fuel salt. The blue color shows Hastelloy-N, a material used for the plenum and vessel wall, and the white color is a void space. The model contains about 2000 geometry surfaces and 2066 calculation zones. In this thesis, all figures of the core were generated using the built-in SERPENT plotter.
+
+\begin{figure}[hbp!] % replace 't' with 'b' to 
   \centering
   \vspace{-0.3em}
-  \includegraphics[width=1.05\textwidth]{gas_separation.png}
-  \caption{Flow diagram for \gls{MSBR} plant. Green line indicates gas separation and off-gas system \cite{robertson_conceptual_1971}.}
+  \includegraphics[width=1.05\textwidth]{plan_view_ser.png}
+  \caption{Plan view of \gls{MSBR} model.}
   \vspace{-0.6em}
-  \label{fig:gas_removal_system}
+  \label{fig:serpent_plan_view}
 \end{figure}
 \FloatBarrier
-\section{Online reprocessing method}
-\subsection{Online separations and feeds}
-The ability to perform online reprocessing of fuel salt improves the potential neutronic performance of liquied-fueled reactors. Firstly, it is unnecessary for liquid-fueled reactors to operate with excess reactivity because fissile material is continuously adding into the core. Secondly, ability to continuously removing fission products that includes strong absorbers (poisons) might significantly improve fuel utilization and decrease neutron parasitic absorption. Finally, neutronic parameters could be adjusted ``on-the-fly" without operational cycle interruption. Nevertheless, removal of each element from the liquid fuel salt presents a exclusive problem in terms of storage and disposal of the separated materials.
 
-To take into account online reprocessing two principal approaches might be implemented. One is a batch-wise approach where material is moved into or from the core at specific time intervals (batch). This approach based on assumption that specific material accumulation in the core during the time between separations or feeds does not affect on reactor physics. This method requires the simulation to stop at a given moment in time and restart it with a new fuel salt composition (after removal discharged materials and addition fresh fissile and/or fertile materials). This approach was implemented in a ChemTriton script \cite{powers_new_2013} which has been developed by T.J.Harrision, \gls{ORNL}, and actively using for online reprocessing simulation with SCALE/TRITON \cite{bowman_scale_2011} and Shift \cite{pandya_implementation_2016}. 
+\begin{figure}[hbp!] % replace 't' with 'b' to 
+  \centering
+  \vspace{-0.3em}
+  \includegraphics[width=1.05\textwidth]{sect_view_ser.png}
+  \caption{Elevation view of \gls{MSBR} model.}
+  \vspace{-0.6em}
+  \label{fig:serpent_sectional_view}
+\end{figure}
+\FloatBarrier
 
-Another approach is continuous reprocessing where material is separating from (or added into) the core at all times and exactly simulate a true continuous online reprocessing. This method is more difficult because it requires adding a term to the Bateman equations. In SCALE/TRITON, ORIGEN \cite{gauld_isotopic_2011} solves a set of Bateman equations using one-group averaged fluxes and cross-sections obtained from a transport calculation. Bateman equations that describe the rate of change of the isotopes due to neutron induced reactions and decay
-processes could be written in this form \cite{aufiero_extended_2013}:
+In the model, zone I, zone II-A graphite blocks was described using circular cylinder and square cylinder surface types, lengthwise ridges at each corner mentioned earlier was specified using dodecagonal cylinder surfaces and general planes (figure~\ref{fig:I_element_ref}, \ref{fig:II_element_ref}). Zone I of the core was described using square lattice inscribed in the octagonal cylinder surfaces to accurately represent geometry of that region.
 
-\begin{align*}
-\frac{dN_i}{dt}=\bar{\Phi}\sum\limits_{j}N_{j}\sigma_{j \rightarrow i} - \bar{\Phi}\sum\limits_{j}N_{i}\sigma_{i \rightarrow j} + \sum\limits_{j}N_{j}\lambda_{j}b_{j \rightarrow i} - N_{i}\lambda_{i}
-\end{align*}
-where $N_i,N_j$ are the number densities of isotopes $i$ and$j$;\\
-$\bar{\Phi}$ is averaged in the space and energy spectrum neutron flux;\\
-$\sigma_{j \rightarrow i}$ is the microscopic one-group transmutation cross section of nuclide $j$ to nuclide $i$;\\
-$\lambda_i$ and $\lambda_j$ are the decay constants of nuclides $i$ and $j$;\\
-$b_{j \to i}$ is the branching fraction for neutron absorption by isotope $j$ that lead to the formation of isotope $i
-$.
+The main challenge was accurately represent zone II-B because it has irregular elements with sophisticated shape. From the \gls{ORNL} report \cite{robertson_conceptual_1971}, the suggested design of zone II-B has 8 irregularly-shaped graphite elements every 45$^\circ$ as well as salt channels (figure~\ref{fig:detail_plan_view}). These graphite elements were simplified into right-circular cylindrical shapes  with central channels. Fig.~\ref{fig:serpent_zoneII} illustrates this core region in SERPENT model. Volume of fuel salt in zone II kept exactly 37\%, consequently, this simplification did not considerably change neutronics of the core. This is the only simplification made to the \gls{MSBR} conceptual geometry in this work. 
 
-The four terms on the right-hand side of the equation represent (1) the production rate of nuclide $i$ from irradiation, (2) the loss rate of nuclide $i$ due to irradiation, (3) the decay rate of nuclide $i$ into nuclide $j$, and (4) the loss rate of nuclide $i$ due to decay. Mentioned earlier deterministic code SCALE/TRITON and Monte Carlo codes MCNP, Shift, KENO-VI do not support non-zero removal or feeds rates for depletion simulations.
+\begin{figure}[hbp!] % replace 't' with 'b' to 
+  \centering
+  \vspace{-0.3em}
+  \includegraphics[width=1.05\textwidth]{ser_zone_II.png}
+  \caption{Detailed view of \gls{MSBR} zone II model.}
+  \vspace{-0.6em}
+  \label{fig:serpent_zoneII}
+\end{figure}
+\FloatBarrier
 
-Online fuel reprocessing can be explicitly introduced in the system of equations by adding effective decay and transmutation terms for the different nuclides. During fuel composition evolution calculations, the total mass fraction of thorium fluoride is kept constant at 12\%. For this purpose, transmuted into $^{233}$Th isotope are replaced with the fresh $^{232}$Th feed material. It could be achieved by modifying the Bateman equation adding the following additional gain term to the right-hand side:
-\begin{align*}
-\bar{\Phi}\sum\limits_{k=^{232}Th}N_{k}\sigma_{k,c}
-\end{align*}
-where $\sigma_{k,c}$ is the one-group capture cross section of thorium-232.
+\subsection{Material composition and normalization parameters}
+The fuel salt, the reactor graphite, and the modified Hastelloy-N are materials 
+unique of the \gls{MSBR} and were created at \gls{ORNL}. The initial fuel salt used the same density (3.35 g/cm$^3$) and composition LiF-BeF$_2$-ThF$_4$-$^{233}$UF$_4$ (71.8-16-12-0.2 mole \%) as the \gls{MSBR} design\cite{robertson_conceptual_1971}. The lithium in the molten salt fuel is a fully enriched $^{7}$Li because $^{6}$Li is a very strong neutron poison and becomes tritium upon neutron capture. 
 
-The removal of fission products and protactinium is achieved by adding an explicit decay term to the Bateman equations. For the generic fission product l, following additonal loss term might be added:
-\begin{align*}
-- N_{l}\lambda_{l,reproc}
-\end{align*}
-where $\lambda_{l,reproc}$ is the effective removal time constant of the particular chemical specie. This approach was recently implemented as a purpose-made extension of the continuous-energy Monte Carlo reactor physics and burn-up code SERPENT \cite{aufiero_extended_2013} but it is not properly tested and unavailable for ordinary users so far.
-
-To validate and verify in the nearest future the SERPENT 2 online reprocessing capability, I have been developed Python-based script, SaltProc \cite{andrei_rykhlevskii_arfc/saltproc:_2018}, implementing batch-wise approach on the top of SERPENT 2 burnup routine. High-fidelity full-core \gls{MSBR} model serves as a benchmark in online reprocessing simulation described in this thesis. Assessment against the SERPENT 2 continuous online reprocessing procedure based on the benchmark is not treated here.
-
-\subsection{Fuel material flows}
-
-The \gls{MSBR} has the capability to remove all poisons (e.g. $^{135}$Xe), noble metals, and gases (e.g. $^{75}$Se, $^{85}$Kr) every 20 seconds. The $^{232}$Th in the fuel absorbs thermal neutrons and produces $^{233}$Pa which then decays into the fissile $^{233}$U. Protactinium presents a challenge, since it has a large absorption cross section in the thermal energy spectrum. Accordingly, $^{233}$Pa is continuously removed from the fuel salt into a protactinium decay tank and allowing $^{233}$Pa to decay to $^{233}$U without poisoning the reactor. The reactor reprocessing system is designed to separate $^{233}$Pa from the molten-salt fuel over 3 days, hold it while $^{233}$Pa decays into $^{233}$U, and return it back to the primary loop. This feature allows the reactor to avoid neutron losses to protactinium, keeps fission products to a very low level, and 
-increases the efficiency of $^{233}$U breeding. Table~\ref{tab:reprocessing_list} summarizes full list of nuclides and the cycle times used for modeling salt treatment and separations \cite{robertson_conceptual_1971}. 
+For cross section generation, JEFF-3.1.2 was employed \cite{oecd/nea_data_bank_jeff-3.1.2_2014}. The specific temperature was fixed for each material to correctly model the Doppler-broadening of resonance peaks when Serpent generate problem-oriented nuclear data library. The isotope composition of each material at the initial state was described in detail in the MSBR conceptual design study \cite{robertson_conceptual_1971} and has been applied to Serpent model without any modification. Table~\ref{tab:msbr_tab} is the summary of the major \gls{MSBR} parameters used by this model \cite{robertson_conceptual_1971}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[ht!]
-        \centering
-        \caption{The effective cycle times for protactinium and fission product removal \cite{robertson_conceptual_1971}.}
-        \begin{tabular}{|m{0.25\textwidth} | m{0.45\textwidth}|m{0.20\textwidth}|}
-        \hline 
+\begin{table}[h!]
+        %\centering
+        \caption{Summary of principal data for MSBR \cite{robertson_conceptual_1971}.}
+        \begin{tabular}{|m{0.56\linewidth} | m{0.40\linewidth}|}
+        \hline
         %\begin{tabularx}{\linewidth}{l X} \toprule 
-        Processing group & \qquad\qquad\qquad Nuclides & Cycle time (at full power) \\ [5pt] \hline 
-        Rare earths & Y, La, Ce, Pr, Nd, Pm, Sm, Gd & 50 days \\ [5pt] \hline 
-        \qquad & Eu & 500 days \\ [5pt] \hline
-        Noble metals & Se, Nb, Mo, Tc, Ru, Rh, Pd, Ag, Sb, Te & 20 sec \\ [5pt] \hline
-        Seminoble metals & Zr, Cd, In, Sn & 200 days \\ [5pt] \hline
-        Gases & Kr, Xe & 20 sec \\ [5pt] \hline
-        Volatile fluorides & Br, I & 60 days \\ [5pt] \hline
-        Discard & Rb, Sr, Cs, Ba & 3435 days \\ [5pt] \hline
-        Salt discard & Th, Li, Be, F & 3435 days \\ [5pt] \hline
-        Protactinium & $^{233}$Pa & 3 days \\ [5pt] \hline
-        Higher nuclides & $^{237}$Np, $^{242}$Pu & 16 years \\ [5pt] \hline
+                Thermal capacity of reactor           & 2250 MW(t)
+                \\ [5pt] \hline 
+                Net electrical output                 & 1000 MW(e) 
+                \\ [5pt] \hline 
+                Net thermal efficiency        & 44.4\%
+                \\ [5pt] \hline 
+                Salt volume fraction in central core zone     & 0.13
+                \\ [5pt] \hline 
+                Salt volume fraction in outer core zone       & 0.37
+                \\ [5pt] \hline 
+                Fuel salt inventory (Zone I)                  & 8.2 m$^3$	
+                \\ [5pt] \hline 
+                Fuel salt inventory (Zone II)                 & 10.8 m$^3$	
+                \\ [5pt] \hline 
+                Fuel salt inventory (annulus)                 & 3.8 m$^3$	
+                \\ [5pt] \hline 
+                Total fuel salt inventory                     & 48.7 m$^3$	
+                \\ [5pt] \hline 
+                Fissile mass in fuel salt                   & 1303.7 kg	
+                \\ [5pt] \hline 
+                Fuel salt components                  & 
+                LiF-BeF$_2$-ThF$_4$-$^{233}$UF$_4$	
+                \\ [5pt] \hline 
+                Fuel salt composition                 & 
+                71.85-16-12-0.25 mole\%
+                \\[5pt]  \hline 
+                Fuel salt density                    & 
+                3.35 g/cm$^3$
+                \\[5pt]  \hline 
         \end{tabular}
-        \label{tab:reprocessing_list}
-          \vspace{-0.9em}
+        \label{tab:msbr_tab}
 \end{table}
-Since removal rates vary among nuclides in this reactor concept, the SERPENT 2 build-in reprocessing subroutine is unable to capture the desired reprocessing strategy. The removal rates also dictate the necessary resolution of depletion 
-calculations. If the depletion time intervals are very short an enormous number of depletion steps are required to obtain the equilibrium composition. On the other hand, if the depletion  calculation time interval is too long, serious impacts of short lived fission products are not captured in a manner that is faithful \gls{MSBR} conceptual design. To compromise, the time interval for depletion calculations in this model was selected as 3 days to correlate with the removal interval of $^{233}$Pa and thorium was continuously added to maintain the initial mass fraction of $^{232}$ThF$_4$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Simplifying assumptions}
-The main goal of present study is to identify the effects of moving materials from and to the reactor core, and find equilibrium performance of a thorium fuel cycle using \gls{MSBR}. To highlight these effects and simplify the analyses, several assumptions have been made.
-
-First of all, thorium loading during operation was held constant and equal initial thorium loading (i.e. $m_{Th}(t)=m_0$) with variable feed rate (in kg/day) of fresh thorium. Because thorium is a fertile material with relatively high absorption cross section, this has few important impacts on reactor physics, including negatively impacting reactivity and distorting the fuel-to-moderator ratio which makes neutron energy spectrum harder. While a reduction in the thorium loading reduces the amount of initial fissile material required to achieve criticality, the breeding rate of $^{233}$U should be sufficient to maintain the core critical during operation.
-
-The solubuluty of heavy metals is a known problem for \glspl{MSR} but it is fundamentally dependent from the type of carrier salt. For this work, solubility limits for uranium were deprioritized because the molar fraction of UF$_4$ was less than percent which considered to be reasonable to first-order for this study. In addition, it was assumed that addition or removal of soluble material (e.g. UF$_4$) has a small influence on the fuel salt volume, this volume change is not treated here.
-
-Figure~\ref{fig:th_cycle} from Chapter 1 demonstrates that transformation $^{232}$Th to $^{233}$U takes about 30 days because $^{233}$Pa $\beta$-decay has half-life 27.4 days. Therefore, if protactinium decay tank is empty at the moment of reactor startup than expected fissile material stream would appears only after few weeks of reactor operation at full power. To avoid time-dependent feed rate for $^{233}$UF$_4$ it is assumed that protactinium decay tank contain some amount of $^{233}$UF$_4$, and the rate of fissile material flow from the tank to the core is set equal to $^{233}$Pa removal rate. Moreover, simulated cycle time at full power in this study was limited by 20 years ($\approx$ 7300 days). Finally, 100\% reprocessing separation efficiency was assumed.
-
-The thermal fission of a $^{233}$U in fluoride salts can be shown to be an overall oxidizing process to the salt. This happens because the uranium nucleus balances the charge of four fluorine ions in the salt (e.g. $^{233}$UF$_4$), but fission products tend to not bind to all the four fluorines released after the uranium fissions. Figure~\ref{fig:excess_fluorine} demonstates an example of an oxidative fission reaction. This excess of fluorine must be compensated, otherwise chemical reactions harmful to reactor components would occur \cite{ridley_method_2017}. In this study, fission’s oxidizing effects are ignored.
-
-\begin{figure}[htp!] % replace 't' with 'b' to 
-  \centering
-  \vspace{-0.3em}
-  \includegraphics[width=0.8\textwidth]{excess_fluorine.png}
-  \caption{Process of production an excess of fluorine due to fission of a $^{233}$U in fluoride salts \cite{ridley_method_2017}.}
-  \vspace{-0.6em}
-  \label{fig:excess_fluorine}
-\end{figure}
-\FloatBarrier
-
-Finally, for this study equilibrium is defined as when $k_{eff}$ of the full-core model with black boundary conditions and the $^{233}$U concentration in the fuel salt are both significantly invariant in time (i.e., vary less than percent over several months). The fissile material was loaded into the system (core and protactinium decay tank) only at startup, therefore, no additional external feed or removal of fissile material assumed during reactor operation.
-
-\section{Python code description}
-The objectives for the SaltProc tool were to expand SERPENT 2 burn-up capabilities for modeling liquid-fueled \gls{MSR} and provide an open-source tool for the simulation of reactors where material is removing or adding at any time during fuel irradiation. The code written in Python 2.7, uses HDF5 \cite{the_hdf_group_hierarchical_nodate} to store data and the Nuclear Engineering Toolkit - PyNE \cite{scopatz_pyne:_2012} for SERPENT output files parsing. As was discussed earlier, SaltProc maintains the iterative semi-continuous approach to simulate a continuous feeds and removals.
-
-The tool structure and capabilities are close to ChemTriton tool for SCALE developed in \gls{ORNL} \cite{powers_new_2013}. The primary function of SaltProc is to manage material mixtures while SERPENT 2 performs most of the computationally heavy work namely neutron transport and burnup calculations. Each material stream represents a fluid in the core design and has specific parameters (e.g. isotopic composition, reprocessing interval, mass rate, removal efficacy, etc). In addition, there is a set of available functions for each stream: read and write isotopic data in/from database, separate out specific isotopes from stream with defined efficiency, feed in specific isotopes to stream, maintain number density of specific nuclide in the core constant. These attributes and functions are crucial to simulate the operation of a complex, multi-zone, multi-fluid \gls{MSR} and are universal enough to apply it for various types of systems.
-
-Figure~\ref{fig:saltproc_flow} demonstrates the algorithm of online reprocessing simulation with SaltProc and SERPENT 2. To perform depletion step, SaltProc reads a external SERPENT 2 template file which must be defined by user. This file contain input cards with all required for burnup calculations data such as geometry, moderator and construction materials isotopic composition, neutron population, criticality cycles, total heating power, boundary conditions. After depletion calculation completes, SaltProc reads the burned fuel composition file into memory and store it into HDF5 database. SaltProc only knows the number density and isotopic composition of a given fuel stream which provides the tool with the flexibility to model any geometry: an infinite medium, a unit cell, a multi-zone simplified assembly, or a full-core. While in some applications the simple sigle-cell is sifficient to get an accurate results within the fuel for depletion calculations with reduced simulation time, this flexibility provides high-fidelity full-core geometry capabilities for comparisons to more scrupulous models.
-
-\begin{figure}[htp!] % replace 't' with 'b' to 
-  \centering
-  \vspace{-0.3em}
-  \includegraphics[width=\textwidth]{saltproc_flowchart.pdf}
-  \caption{Flow chart for the Saltproc python-based tools.}
-  \vspace{-0.6em}
-  \label{fig:saltproc_flow}
-\end{figure}
-\FloatBarrier
-
-SaltProc could manage as many fuel streams as desired. It also may work with multiple depletion materials. At the end of a each depletion step, SaltProc reads the separate depleted compositions and tracks each material stream individually. Following this, chemical reprocessing functions applying to fuel stream vectors. These vectors then combining in matrix, storing in database and printing into SERPENT composition file for the next step calculations.
-
-Liquid-fueled \gls{MSBR} design focuses on the state of the core at an equilibrium condition, after fission products have built up in the fuel salt during years if operation. Changes in isotopic composition of the fuel salt continues encounter small changes even after decades of operation, but the dominant nuclides that have significant impact to the neutronics behavior tend to reach an equilibrium concentration (e.g., vary about 10$^{-5}$ over several years). In contrast, from the startup of an \gls{MSBR} until equilibrium condition, the fuel salt composition undergo significant changes (e.g., fission producs, minor actinides, and fissile materials number density). During this period, the material feeds and removals should be optimized for the fastest \gls{MSBR} transition to an equilibrium state, where the material streams are more constant in time. A faster transition simplifies the reactor operation because in an equilibrium state the fissile and fertile feed rates, safety parameters, and fission product removal rates are more constant in time.
-
-In addition, SaltProc is able to define time-dependent material feed and removal rates to investigate the effect of different nuclide separations and/or feeds. The time dependence of the streams could be define as piecewise functions and could be dependent on certain conditions being met. For instance, the tool could increase fissile material feeding rate if effective multiplication factor, $k_{eff}$, below a specific limit. Moreover, it could be useful to keep fissile material number density in the core approximately constant to accumulated excess of $^{233}$U into protactinium decay tank. These capabilities allow SaltProc to investigate the effect of lower concentrations of fissile and fertile startup loads. In sum, the development approach of SaltProc focused on producing a generic and flexible tool to give SERPENT 2 Monte Carlo code the ability to conduct advanced fuel cycle analysis as well as simulate a myriad of online refueled systems.

@@ -708,7 +708,7 @@ surf 3104 octa 0.0 0.0 228.60 193.97       % smallest octader, which cover 8 tri
 % --- Cells:
 %cell 300  0    fill 300 -3000 3003 3011 -3012
 cell 303  0    fill 400 -3003 3011 -3012
-cell 305  0    fuel -3004 3002 3011 -3012
+cell 305  0    fuel -3004 3002 3011 -3012  % annulus
 cell 306  0    moder -3005 3004 3015 -3013
 cell 313  0    moder -3004 3012 -3013
 cell 314  0    moder -3004 3015 -3017

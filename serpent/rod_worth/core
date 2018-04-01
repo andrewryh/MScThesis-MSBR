@@ -1,6 +1,6 @@
 set title "MSBR whole core criticality calculation for T=900K, axial reflector presents"
 
-include "geometry/whole_gr0_pois100"
+include "geometry/whole_gr0_pois0"
 %include "../../geometry/whole_core_axial_ref"
 
 % --- Fuel (LiF-BeF2-ThF4-233UF4 71.8-16-12-0.2 mole %) Table 3.7 Robertson:
