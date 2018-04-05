@@ -2,29 +2,32 @@
 
 \section{SERPENT 2 code overview}
 
-SERPENT is a continuous-energy Monte Carlo neutronics code capable of solving the neutron transport problem by tracking individual neutrons within the problem geometry and using stochastic method to determine chain of events for each neutron \cite{leppanen_serpent_2015}. SERPENT has been under active development at the VTT Technical Research Centre of Finland from 2004, where it was initially conceived as a tool to simplify group constant generation in a high-fidelity Monte Carlo environment. During this period, SERPENT has seen as widely used transport code and number of users grows steadly. Now SERPENT used by more than 500 registered individuals in 155 organizations located in 37 countries around the world. This success is not only a result of the simple and naive cross section generation procedures, but also its high-performance parallelization and user-friendly usage. The burnup calculation capability in SERPENT was established early on, and is fully based on built-in calculation routines, without using any external solvers. A restart features allows performing fuel shuffling or applying any modifications in the input by dividing the calculation into several parts which is crucial for online reprocessing simulations.
+SERPENT is a continuous-energy Monte Carlo neutronics software capable of solving the neutron transport problem by tracking individual neutrons within the problem geometry and using stochastic method to determine chain of events for each neutron \cite{leppanen_serpent_2015}. SERPENT has been under active development at the VTT Technical Research Centre of Finland since 2004, where it was initially conceived as a tool to simplify group constant generation in a high-fidelity Monte Carlo environment. SERPENT is now widely used transport code  with a growing user base. Now SERPENT used by more than 500 registered individuals in 155 organizations located in 37 countries around the world. The burnup calculation capability in SERPENT is based on built-in calculation routines, without using any external solvers. A restart feature allows performing fuel shuffling or applying any modifications in the input by dividing the calculation into several parts which is crucial for online reprocessing simulations.
 
-Latest version, SERPENT 2, supports advanced geometry types and has advanced burnup capabilities, including online refueling capabilities which are necessarily for neutronic computations of pebble-bed reactors and liquid-fueled \glspl{MSR} \cite{aufiero_extended_2013}. Unfortunately, build-in online refueling features still under active development and do not available for ordinary users. Furthermore, recently was demonstrated multi-physics simulations using SERPENT 2, i.e. coupled calculations with thermal hydraulics, \gls{CFD} and fuel performance codes \cite{leppanen_numerical_2015}. Two-way coupling to thermal hydraulics, CFD and fuel performance codes has been a major topic in SERPENT development for the past several years and operate on two levels: 	internal coupling to built-in solvers for fuel behavior and thermal hydraulics, and external coupling via a universal multi-physics interface. 
+The latest version, SERPENT 2, supports advanced geometries and has advanced burnup capabilities, including online refueling capabilities which are necessary for neutronic computations of pebble-bed reactors and liquid-fueled \glspl{MSR} \cite{aufiero_extended_2013}. Unfortunately, built-in online refueling features are still under active development and unavailable to ordinary users. Furthermore, recently multi-physics simulations using SERPENT 2 were demonstrated, i.e. coupled calculations with thermal hydraulics, \gls{CFD} and fuel performance codes \cite{leppanen_numerical_2015}. Two-way coupling to thermal hydraulics, \gls{CFD}, and fuel performance codes operates on two levels: internal coupling to built-in solvers for fuel behavior and thermal hydraulics, and external coupling via a universal multi-physics interface. 
 
-SERPENT 2 can be effectively run in parallel on computer clusters and multi-core workstations. Parallelization at core level is handled by thread-based OpenMP, which has the advantage that all processsors use shared memory space. Calculations can be divided into several nodes by distributed-memory \gls{MPI} parallelization. SERPENT 2  is an improvement upon SERPENT 1, and contains a complete redesign of memory management using hybrid OpenMP \cite{dagum_openmp:_1998} + \gls{MPI} parallelization.  This hybrid parallelization is important in depletion calculations using computer clusters with multiple nodes, and allows to achieve significant speed-up in depletion calculations on computer clusters with more than 4'000 cores \cite{leppanen_serpent_2015-1}. 
+SERPENT 2 can be effectively run in parallel on computer clusters and multi-core workstations. Parallelization is handled by thread-based OpenMP, which has the advantage that all processsors use shared memory space. Calculations can be divided into several nodes by distributed-memory \gls{MPI} parallelization. SERPENT 2  is an improvement upon SERPENT 1, and contains a complete redesign of memory management using hybrid OpenMP \cite{dagum_openmp:_1998} + \gls{MPI} parallelization.  This hybrid parallelization is important in depletion calculations using computer clusters with multiple nodes, and allows to achieve significant speed-up in depletion calculations on computer clusters with more than 4'000 cores \cite{leppanen_serpent_2015-1}. 
 
 All calculations presented in this thesis were performed using SERPENT 2 version 2.1.30 on Blue Waters’ XE6 nodes. For cross section generation, JEFF-3.1.2 was employed \cite{oecd/nea_data_bank_jeff-3.1.2_2014}. 
 
 \section{Molten Salt Breeder Reactor description}
 
-The \gls{MSBR} vessel has a diameter of 680 cm and a height of 610 cm. It contains a molten fluoride fuel-salt mixture that generates heat in the active core region and transports that heat to the primary heat exchanger by way of 
-the primary salt pump. In the active core region, the salt flows through channels in moderating and reflecting graphite blocks. Salt at about 565$^{\circ}$C enters the central manifold at the bottom via four 40.64-cm-diameter nozzles and flows through the lower plenum and upward via the channels in the graphite to exit at the top at about 704$^{\circ}$C through four equally spaced nozzles which connect to the salt-suction pipes leading to primary circulation pumps. The fuel salt drain lines connects to the bottom of the reactor vessel inlet manifold.
+Figure~\ref{fig:ref_sect_msbr} shows the \gls{MSBR} vessel which has a diameter of 680 cm and a height of 610 cm. It contains a molten fluoride fuel-salt mixture that generates heat in the active core region and transports that heat to the primary heat exchanger by way of the primary salt pump. In the active core region, the salt flows through channels in moderating and reflecting graphite blocks. Salt at about 565$^{\circ}$C enters the central manifold at the bottom via four 40.64-cm-diameter nozzles and flows upward through channels in the lower plenum graphite. The fuel salt exits at the top at about 704$^{\circ}$C through four equally spaced nozzles which connect to the salt-suction pipes leading to primary circulation pumps. The fuel salt drain lines connect to the bottom of the reactor vessel inlet manifold.
 
-Reactor graphite experiences significant dimensional changes due to neutron irradiation, consequently, the reactor core was designed for periodic replacement. The reference \gls{MSBR} design has an average core power density of about 6.666 W/g, which, based in the irradiation behavior of materials obtained from \gls{MSRE}, allows to achieve useful core graphite life of about 4 years and reflector graphite 	life during 30-year lifetime of plant \cite{robertson_conceptual_1971}.
+Since reactor graphite experiences significant dimensional changes due to neutron irradiation the reactor core was designed for periodic replacement. The reference \gls{MSBR} design has an average core power density of approximately 6.666 W/g. Based on the irradiation experimental data from \gls{MSRE} core graphite lifetime with this power density is about 4 years and reflector graphite lifetime is 30 years \cite{robertson_conceptual_1971}.
 
-Moreover, it was decided to remove and install the core graphite as an assembly rather than by individual blocks, because it relatively quickly, easier for maintenance personnel and has lower probability of radioactive elements escape. In addition, handling the core as an assembly also allows the replacement core to be carefully preassembled and tested under factory conditions.
+\begin{figure}[htp!] % replace 't' with 'b' to 
+  \centering
+  \vspace{-0.3em}
+  \includegraphics[width=1.07\textwidth]{elev_view_vessel.png}
+  \caption{Sectional elevation of \gls{MSBR} vessel \cite{robertson_conceptual_1971}.}
+  \vspace{-0.6em}
+  \label{fig:ref_sect_msbr}
+\end{figure}
 
-The core has two radial zones bounded by a solid cylindrical graphite reflector 
-and the vessel wall. The \gls{MSBR} core consists of two different zones. The central zone, zone I, in which 13\% of the volume is fuel salt and 87\% graphite. 
-Zone I composed of 1'320 graphite cells, 2 graphite control rods, and 
-2 safety rods. The under-moderated zone, zone 
-II, with 37\% fuel salt, and radial reflector, surrounds the zone I core region 
-and serves to diminish neutron leakage. Zones I and II are surrounded radially and axially by fuel salt. This space for fuel is necessary for injection and flow of molten salt. Fig.~\ref{fig:ref_plan_msbr} and \ref{fig:ref_sect_msbr} demonstrate \gls{MSBR} vessel, core configuration, ``fission" (zone I) and ``breeding" (zone II) regions position inside the vessel.
+Moreover, it was decided to remove and install the core graphite as an assembly rather than by individual blocks, because it is relatively quickly, easier for maintenance personnel and has lower probability of radioactive elements escape due to used blocks damage during removal. In addition, handling the core as an assembly also allows the replacement core to be carefully preassembled and tested under factory conditions.
+
+Figure~\ref{fig:ref_plan_msbr} and \ref{fig:ref_sect_msbr} demonstrate the configuration of the \gls{MSBR} vessel, core configuration, ``fission" (zone I) and ``breeding" (zone II) regions inside the vessel. The core has two radial zones bounded by a solid cylindrical graphite reflector and the vessel wall. The central zone, zone I, in which 13\% of the volume is fuel salt and 87\% graphite. Zone I composed of 1,320 graphite cells, 2 graphite control rods, and 2 safety\footnote{These rods needed for emergency shutdown only.} rods. The under-moderated zone, zone II, with 37\% fuel salt, and radial reflector, surrounds the zone I core region and serves to diminish neutron leakage. Zones I and II are surrounded radially and axially by fuel salt. This space for fuel is necessary for injection and flow of molten salt.
 
 \begin{figure}[hbp!] % replace 't' with 'b' to 
   \centering
@@ -36,17 +39,7 @@ and serves to diminish neutron leakage. Zones I and II are surrounded radially a
 \end{figure}
 \FloatBarrier
 
-\begin{figure}[hbp!] % replace 't' with 'b' to 
-  \centering
-  \vspace{-0.3em}
-  \includegraphics[width=\textwidth]{elev_view_vessel.png}
-  \caption{Sectional elevation of \gls{MSBR} vessel \cite{robertson_conceptual_1971}.}
-  \vspace{-0.6em}
-  \label{fig:ref_sect_msbr}
-\end{figure}
-\FloatBarrier
-
-There are eight graphite slabs with a width of 15.24 cm in zone II one to each other, one of which is illustrated in Fig.~\ref{fig:detail_plan_view}. The holes in the centers are for the core lifting rods used during the core replacement operations. These holes also allow a portion of the fuel salt to flow to the top of the vessel for cooling the top head and axial reflector. Fig.~\ref{fig:detail_plan_view} also demonstrates the 5.08-cm-wide annular space between the removable core graphite in zone II-B and the permanently mounted reflector graphite. This annulus, 100\% constists of fuel salt, provides space for moving the core assembly, helps compensate the out-of-roundness dimensions of the reactor vessel, and serves to reduce the damage flux at the surface of the graphite reflector blocks.
+There are eight symmetric graphite slabs with a width of 15.24 cm in zone II, one of which is illustrated in Fig.~\ref{fig:detail_plan_view}. The holes in the centers are for the core lifting rods used during the core replacement operations. These holes also allow a portion of the fuel salt to flow to the top of the vessel for cooling the top head and axial reflector. Fig.~\ref{fig:detail_plan_view} also demonstrates the 5.08-cm-wide annular space between the removable core graphite in zone II-B and the permanently mounted reflector graphite. This annulus constists entirely of fuel salt, provides space for moving the core assembly, helps compensate the elliptical dimensions of the reactor vessel, and serves to reduce the damaging flux at the surface of the graphite reflector blocks.
 
 \begin{figure}[hbp!] % replace 't' with 'b' to 
   \centering
@@ -59,16 +52,14 @@ There are eight graphite slabs with a width of 15.24 cm in zone II one to each o
 \FloatBarrier
 
 \subsection{Core zone I}
-The central region of the core, called zone I, is made up of graphite elements, each $10.16$cm$\times$10.16cm$\times$396.24cm. In zone I, 13\% of the volume is fuel salt and 87\% is graphite. Zone I is composed of 1'320 graphite cells and 4 channels for control rods: two for graphite rods which both regulate and shim during normal operation, and two for backup safety rods consisting of boron carbide clad to assure sufficient negative reactivity for emergency situations.
+The central region of the core, called zone I, is made up of graphite elements, each $10.16$cm$\times$10.16cm$\times$396.24cm. In zone I, 13\% of the volume is fuel salt and 87\% is graphite. Zone I is composed of 1,320 graphite cells and 4 channels for control rods: two for graphite rods which both regulate and shim during normal operation, and two for backup safety rods consisting of boron carbide clad to assure sufficient negative reactivity for emergency situations.
 
-These graphite elements have a mostly rectangular shape with lengthwise ridges at each corner that leave space for salt flow elements. Various element sizes reduce the peak damage flux and power density in the center of the core prevent local graphite damage. Zone I is well-moderated which is necessarily to achieve desired fission power density. Figure~\ref{fig:I_element_ref} demonstrates the elevation and sectional views of graphite elements of zone I \cite{robertson_conceptual_1971} and these elements SERPENT model \cite{rykhlevskii_full-core_2017}.
+These graphite elements have a mostly rectangular shape with lengthwise ridges at each corner that leave space for salt flow elements. Various element sizes reduce the peak damage flux and power density in the center of the core prevent local graphite damage. Zone I is well-moderated to achieve the desired fission power density. Figure~\ref{fig:I_element_ref} demonstrates the elevation and sectional views of graphite elements of zone I \cite{robertson_conceptual_1971} and these elements of the SERPENT model \cite{rykhlevskii_full-core_2017}.
 
 \subsection{Core zone II}
-The undermoderated zone, zone II, surrounds zone I. Combined with the bounding radial reflector, zone II serves to diminish neutron leakage. This zone is formed of two kinds of elements: elements like those in zone I with a larger channel diameter (zone II-A), and radial graphite slats (zone II-B). 
+Zone II which is undermoderated, surrounds zone I. Combined with the bounding radial reflector, zone II serves to diminish neutron leakage. This zone is formed of two kinds of elements: large-diameter fuel channels (zone II-A) and radial graphite slats (zone II-B). 
 
-Zone II has 37\% fuel salt by volume and each element has a fuel channel 
-diameter of 6.604cm. It is divided into two different zones: zone II-A and zone 
-II-B. The graphite elements for zone II-A are prismatic and have elliptical-shaped dowels running axially between the prisms and needed to isolate the fuel salt flow in zone I from that in zone II. Fig.~\ref{fig:II_element_ref} shows shape and dimensions of these graphite elements and their SERPENT model. Zone II-B elements are rectangular slats spaced far enough apart to provide the 0.37 fuel salt volume fraction. The reactor zone II-B graphite 5.08cm-thick slats vary in the radial dimension (average width is 26.67cm) as shown in figure~\ref{fig:detail_plan_view}. Zone II serves as ``blanket" to achieve the best ``performance" associated with a high breeding ratio and a low fissile inventory. The neutron energy spectrum in zone II is made harder, to enhance the rate of thorium resonance capture relative to the fission rate, thus limiting the neutron flux in the outer core zone and reducing the neutron leakage \cite{robertson_conceptual_1971}. 
+Zone II has 37\% fuel salt by volume and each element has a fuel channel diameter of 6.604cm. The graphite elements for zone II-A are prismatic and have elliptical-shaped dowels running axially between the prisms and needed to isolate the fuel salt flow in zone I from that in zone II. Fig.~\ref{fig:II_element_ref} shows shape and dimensions of these graphite elements and their SERPENT model. Zone II-B elements are rectangular slats spaced far enough apart to provide the 0.37 fuel salt volume fraction. The reactor zone II-B graphite 5.08cm-thick slats vary in the radial dimension (average width is 26.67cm) as shown in figure~\ref{fig:detail_plan_view}. Zone II serves as a blanket to achieve the best performance: a high breeding ratio and a low fissile inventory. The neutron energy spectrum in zone II is made harder to enhance the rate of thorium resonance capture relative to the fission rate, thus limiting the neutron flux in the outer core zone and reducing the neutron leakage \cite{robertson_conceptual_1971}. 
 
 \begin{figure}[hbp!] % replace 't' with 'b' to 
   \centering
@@ -91,9 +82,9 @@ II-B. The graphite elements for zone II-A are prismatic and have elliptical-shap
 \FloatBarrier
 
 \section{Existing full-core MSBR models}
-There are few recent studies presented full-core \gls{MSBR} models for neutronics analysis. First, MCNP6 model developed by Park \emph{et al.} for burn-up computations and safety parameters analysis \cite{park_whole_2015}. This model has significant simplifications in zone II-B graphite elements geometry, and completely ignore lengthwise ridges at each corner of cell. Figure~\ref{fig:park} shows simplifications in geometry of the model.  More recently Skirpan \emph{et al.} built a model of the core using Shift \cite{pandya_implementation_2016} to compare fidelity of one-cell, two-cell and full-core models of \gls{MSBR} \cite{skirpan_fuel_2017}. In this model complex cell geometry in zone I and zone II-A were approximated to sligtly rotated square cylinder (figure~\ref{fig:skirpan_cell}). Moreover, as can be seen from figure~\ref{fig:skirpan_plan}, zone II-B described using horizontal, vertical and 45$^\circ$-degree graphite elements, that might significantly distort neutron flux and reacton rates in that region, and, consequently, misrepresent breeding parameters of the whole reactor.
+There are few recent studies presenting full-core \gls{MSBR} models for neutronics analysis. First, Park \emph{et al.} developed an MCNP6 model for burnup computations and safety parameter analysis \cite{park_whole_2015}. This model has significant geometry simplifications in zone II-B graphite elements, and entirely neglects lengthwise ridges at each cell corner. Figure~\ref{fig:park} shows the simplifications in the model geometry.  More recently, Skirpan \emph{et al.} built a model of the core using Shift \cite{pandya_implementation_2016} to compare the fidelity of one-cell, two-cell and full-core models of the \gls{MSBR} \cite{skirpan_fuel_2017}. In this model, complex cell geometry in zone I and zone II-A were approximated to slightly rotated square cylinders (figure~\ref{fig:skirpan_cell}). Moreover, as can be seen from figure~\ref{fig:skirpan_plan}, zone II-B was described by Skirpan \cite{skirpan_fuel_2017} using horizontal, vertical and 45$^\circ$-degree graphite elements. These approximations distort neutron flux and reacton rates in that region, and, consequently, may misrepresent breeding parameters of the whole reactor.
 
-In sum: full-core Monte Carlo model with sufficient fidelity necessarily for online reprocessing and refueling simulation. Moreover, high-fidelity model essential for problem-oriented homogenized nuclear data (multi-group cross sections and diffusion constants) generation for deterministic reactor codes, and for coupled simulations.
+In sum: full-core Monte Carlo model with sufficient fidelity is necessary for online reprocessing and refueling simulation. Moreover, a high-fidelity model is essential for problem-oriented homogenized nuclear data (multi-group cross sections and diffusion constants) generation for deterministic reactor codes, and for coupled simulations.
 
 \begin{figure}[hbp!] % replace 't' with 'b' to 
   \centering
@@ -109,7 +100,7 @@ In sum: full-core Monte Carlo model with sufficient fidelity necessarily for onl
   \centering
   \vspace{-0.3em}
   \includegraphics[width=0.95\textwidth]{skirpan_cell.png}
-  \caption{Geometry of an MSBR fuel channel (left) approximated with a simple geometric model (center) to calculate appropriate volumes to reduce to a two-region model (right) \cite{skirpan_fuel_2017}.}
+  \caption{Geometry of an MSBR fuel channel (left) approximated with a simple geometric model (center) to calculate appropriate volumes to reduce to a two-region model (right) from Skirpan model (Shift). Red is fuel salt, blue is graphite \cite{skirpan_fuel_2017}.}
   \vspace{-0.6em}
   \label{fig:skirpan_cell}
 \end{figure}
@@ -118,7 +109,7 @@ In sum: full-core Monte Carlo model with sufficient fidelity necessarily for onl
   \centering
   \vspace{-0.3em}
   \includegraphics[width=0.7\textwidth]{skirpan_plan_view.png}
-  \caption{Plan view of the \gls{MSBR} full-core transport model at core horizontal midplane \cite{skirpan_fuel_2017}.}
+  \caption{Plan view of the \gls{MSBR} full-core transport model at core horizontal midplane from Skirpan model (Shift). Pink is fuel salt, blue is graphite \cite{skirpan_fuel_2017}.}
   \vspace{-0.6em}
   \label{fig:skirpan_plan}
 \end{figure}
@@ -126,16 +117,15 @@ In sum: full-core Monte Carlo model with sufficient fidelity necessarily for onl
 
 \section{SERPENT 2 model}
 
-To represent complex irregular \gls{MSBR} core geometry advanced geometry surfaces in SERPENT was employed. Fig.~\ref{fig:serpent_plan_view} shows the plan view of the whole-core configuration at the expected reactor operational level when both graphite control rods are fully inserted, and the safety rods are fully withdrawn. The safety rods only get inserted during an accident and were not considered in this model. Another feature of the \gls{MSBR}, its circulating liquid fuel and corresponding delayed neutron precursor drift, is not treated
-here also. 
+Advanced geometry surfaces in SERPENT is employed to represent complex irregular \gls{MSBR} core. Fig.~\ref{fig:serpent_plan_view} shows the plan view of the whole-core configuration at the expected reactor operational level when both graphite control rods are fully inserted, and the safety rods are fully withdrawn. The safety rods only get inserted during an accident and were not inserted in this model. Another feature of the \gls{MSBR}, delayed neutron precursor drift corresponding to its circulating liquid fuel, is not treated here. 
 
-Fig.~\ref{fig:serpent_sectional_view} shows the longitudinal section of the reactor. The violet color represents bare graphite, and the yellow represents fuel salt. The blue color shows Hastelloy-N, a material used for the plenum and vessel wall, and the white color is a void space. The model contains about 2000 geometry surfaces and 2066 calculation zones. In this thesis, all figures of the core were generated using the built-in SERPENT plotter.
+Fig.~\ref{fig:serpent_sectional_view} shows the longitudinal section of the reactor. The violet color represents bare graphite, and the yellow represents fuel salt. The blue color shows Hastelloy-N, a material used for the plenum and vessel wall, and the white color is a void space. The model contains over 2000 geometric surfaces and 2066 calculation zones. In this thesis, all figures of the core were generated using the built-in SERPENT plotter.
 
 \begin{figure}[hbp!] % replace 't' with 'b' to 
   \centering
   \vspace{-0.3em}
   \includegraphics[width=1.05\textwidth]{plan_view_ser.png}
-  \caption{Plan view of \gls{MSBR} model.}
+  \caption{Plan view of SERPENT 2 \gls{MSBR} model developed in this work.}
   \vspace{-0.6em}
   \label{fig:serpent_plan_view}
 \end{figure}
@@ -145,15 +135,15 @@ Fig.~\ref{fig:serpent_sectional_view} shows the longitudinal section of the reac
   \centering
   \vspace{-0.3em}
   \includegraphics[width=1.05\textwidth]{sect_view_ser.png}
-  \caption{Elevation view of \gls{MSBR} model.}
+  \caption{Elevation view of SERPENT 2 \gls{MSBR} model developed in this work.}
   \vspace{-0.6em}
   \label{fig:serpent_sectional_view}
 \end{figure}
 \FloatBarrier
 
-In the model, zone I, zone II-A graphite blocks was described using circular cylinder and square cylinder surface types, lengthwise ridges at each corner mentioned earlier was specified using dodecagonal cylinder surfaces and general planes (figure~\ref{fig:I_element_ref}, \ref{fig:II_element_ref}). Zone I of the core was described using square lattice inscribed in the octagonal cylinder surfaces to accurately represent geometry of that region.
+In the model, zone I, zone II-A graphite blocks were described using circular cylinder and square cylinder surface types. The lengthwise ridges at each corner mentioned earlier were specified using dodecagonal cylindrical surfaces and general planes (figure~\ref{fig:I_element_ref}, \ref{fig:II_element_ref}). Zone I of the core was described using square lattices inscribed in the octagonal cylindrical surfaces to accurately represent geometry of that region.
 
-The main challenge was accurately represent zone II-B because it has irregular elements with sophisticated shape. From the \gls{ORNL} report \cite{robertson_conceptual_1971}, the suggested design of zone II-B has 8 irregularly-shaped graphite elements every 45$^\circ$ as well as salt channels (figure~\ref{fig:detail_plan_view}). These graphite elements were simplified into right-circular cylindrical shapes  with central channels. Fig.~\ref{fig:serpent_zoneII} illustrates this core region in SERPENT model. Volume of fuel salt in zone II kept exactly 37\%, consequently, this simplification did not considerably change neutronics of the core. This is the only simplification made to the \gls{MSBR} conceptual geometry in this work. 
+The main challenge was accurately represent zone II-B because it has irregular elements with sophisticated shapes. From the \gls{ORNL} report \cite{robertson_conceptual_1971}, the suggested design of zone II-B has 8 irregularly-shaped graphite elements every 45$^\circ$ as well as salt channels (figure~\ref{fig:detail_plan_view}). These graphite elements were simplified into right-circular cylindrical shapes  with central channels. Fig.~\ref{fig:serpent_zoneII} illustrates this core region in the SERPENT model. The volume of fuel salt in zone II was kept exactly 37\%, so that, this simplification did not considerably change the core neutronics. This is the only simplification made to the \gls{MSBR} conceptual geometry in this work. 
 
 \begin{figure}[hbp!] % replace 't' with 'b' to 
   \centering
@@ -166,10 +156,9 @@ The main challenge was accurately represent zone II-B because it has irregular e
 \FloatBarrier
 
 \subsection{Material composition and normalization parameters}
-The fuel salt, the reactor graphite, and the modified Hastelloy-N are materials 
-unique of the \gls{MSBR} and were created at \gls{ORNL}. The initial fuel salt used the same density (3.35 g/cm$^3$) and composition LiF-BeF$_2$-ThF$_4$-$^{233}$UF$_4$ (71.8-16-12-0.2 mole \%) as the \gls{MSBR} design\cite{robertson_conceptual_1971}. The lithium in the molten salt fuel is a fully enriched $^{7}$Li because $^{6}$Li is a very strong neutron poison and becomes tritium upon neutron capture. 
+The fuel salt, the reactor graphite, and the modified Hastelloy-N \footnote{Hastelloy-N is very common in reactors now but have been studied and developed at \gls{ORNL} in a program that started in 1950s.} are materials unique of the \gls{MSBR} and were created at \gls{ORNL}. The initial fuel salt used the same density (3.35 g/cm$^3$) and composition LiF-BeF$_2$-ThF$_4$-$^{233}$UF$_4$ (71.8-16-12-0.2 mole \%) as the \gls{MSBR} design\cite{robertson_conceptual_1971}. The lithium in the molten salt fuel is fully enriched in $^{7}$Li because $^{6}$Li is a very strong neutron poison and becomes tritium upon neutron capture. 
 
-For cross section generation, JEFF-3.1.2 was employed \cite{oecd/nea_data_bank_jeff-3.1.2_2014}. The specific temperature was fixed for each material to correctly model the Doppler-broadening of resonance peaks when Serpent generate problem-oriented nuclear data library. The isotope composition of each material at the initial state was described in detail in the MSBR conceptual design study \cite{robertson_conceptual_1971} and has been applied to Serpent model without any modification. Table~\ref{tab:msbr_tab} is the summary of the major \gls{MSBR} parameters used by this model \cite{robertson_conceptual_1971}. 
+For cross section generation, JEFF-3.1.2 was employed \cite{oecd/nea_data_bank_jeff-3.1.2_2014}. The specific temperature was fixed for each material to correctly model the Doppler-broadening of resonance peaks when SERPENT generates the problem-oriented nuclear data library. The isotopic composition of each material at the initial state was described in detail in the MSBR conceptual design study \cite{robertson_conceptual_1971} and has been applied to Serpent model without any modification. Table~\ref{tab:msbr_tab} is the summary of the major \gls{MSBR} parameters used by this model \cite{robertson_conceptual_1971}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[h!]
