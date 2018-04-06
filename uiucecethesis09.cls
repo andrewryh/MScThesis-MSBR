@@ -222,7 +222,7 @@
 %%%        {\lc@selectfont \@thesisname}\\[12pt]
         \@thesisname\\[12pt] % [12pt] added back 3.08
         Submitted in partial fulfillment of the requirements\\
-        for the degree of \@degree\ in \@dept\\
+        \hspace*{-0.18in}for the degree of \@degree\ in \@dept\\
         in the \@college\ of the\\
         University of Illinois at Urbana-Champaign, \@degreeyear}%\vfil}%
      \vskip-0.60in %% ECE: edit to adjust title page spacing (SR)
